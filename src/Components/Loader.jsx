@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import React, { useEffect, useRef } from "react";
 
 function Loader() {
-  const [color, setColor] = useState("white");
   const counterRef = useRef(null);
   const delay = 1000;
 
@@ -14,13 +14,6 @@ function Loader() {
         return;
       }
       counterVal += Math.floor(Math.random() * 10) + 1;
-
-      let randomNum = Math.floor(Math.random() * 10);
-      if (randomNum < 3) {
-        setColor("white");
-      } else {
-        setColor("#A3E635");
-      }
 
       if (counterVal > 100) {
         counterVal = 100;
@@ -39,6 +32,17 @@ function Loader() {
   useEffect(() => {
     setTimeout(() => {
       startCounter();
+      gsap.to(".name", {
+        y: "-100%",
+        delay: 2.3,
+        ease: "expo.in",
+      });
+
+      gsap.to(".counter", {
+        y: "-100%",
+        delay: 2.3,
+        ease: "expo.in",
+      });
     }, delay);
   }, []);
 
@@ -47,8 +51,8 @@ function Loader() {
       initial={{ y: 0 }}
       animate={{ y: "-100%" }}
       transition={{
-        ease: [0.25, 1, 0.5, 1],
-        delay: 3.6,
+        ease: [0.7, 0, 0.84, 0],
+        delay: 3.5,
         duration: 0.6,
       }}
       className="loader p-8 h-screen w-full fixed top-0 left-0 flex flex-col gap-x-0.5 justify-between bg-charcoal"
@@ -59,7 +63,7 @@ function Loader() {
           <motion.h4
             initial={{ y: "100%", opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ ease: [0.25, 1, 0.5, 1], delay: 0.2, duration: 1 }}
+            transition={{ ease: [0.16, 1, 0.3, 1], delay: 0.2, duration: 1 }}
             className="name text-white font-spaceGrotesk text-[10vw] leading-none uppercase tracking-wider font-semibold h-fit md:text-[6vw] lg:text-[4vw] xl:text-[3.5vw]"
           >
             Aftab
@@ -69,7 +73,7 @@ function Loader() {
           <motion.h4
             initial={{ y: "100%", opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ ease: [0.25, 1, 0.5, 1], delay: 0.2, duration: 1 }}
+            transition={{ ease: [0.16, 1, 0.3, 1], delay: 0.2, duration: 1 }}
             className="name text-white font-spaceGrotesk text-[10vw] leading-none uppercase tracking-wider font-semibold h-fit md:text-[6vw] lg:text-[4vw] xl:text-[3.5vw]"
           >
             Shaikh
@@ -79,12 +83,11 @@ function Loader() {
 
       <div className="counter-holder flex justify-end items-center relative overflow-hidden">
         <motion.h4
-          className="counter font-spaceGrotesk text-white font-extrabold text-[30vw] leading-[30vw] md:text-[20vw] md:leading-[20vw] lg:text-[14vw] lg:leading-[14vw]"
+          className="counter font-spaceGrotesk text-limeGreen font-extrabold text-[30vw] leading-[30vw] md:text-[20vw] md:leading-[20vw] lg:text-[14vw] lg:leading-[14vw]"
           ref={counterRef}
-          style={{ color: color }}
           initial={{ y: "100%" }}
           animate={{ y: 0 }}
-          transition={{ ease: [0.25, 1, 0.5, 1], delay: 0.2, duration: 1 }}
+          transition={{ ease: [0.16, 1, 0.3, 1], delay: 0.2, duration: 1 }}
         >
           0
         </motion.h4>
