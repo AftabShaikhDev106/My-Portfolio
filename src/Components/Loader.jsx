@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 
 function Loader() {
+  const [color, setColor] = useState("white");
   const counterRef = useRef(null);
 
   function startCounter() {
@@ -12,6 +13,15 @@ function Loader() {
         return;
       }
       counterVal += Math.floor(Math.random() * 10) + 1;
+
+      let randomNum = Math.floor(Math.random() * 10);
+      if (randomNum < 3) {
+        setColor("#CC3039");
+      } else if (randomNum > 3 && randomNum < 6) {
+        setColor("#1F5C9F");
+      } else {
+        setColor("white");
+      }
 
       if (counterVal > 100) {
         counterVal = 100;
@@ -66,6 +76,7 @@ function Loader() {
         <h4
           className="counter font-spaceGrotesk text-white font-extrabold text-[30vw] leading-[30vw] md:text-[20vw] md:leading-[20vw] lg:text-[14vw] lg:leading-[14vw]"
           ref={counterRef}
+          style={{ color: color }}
         ></h4>
       </div>
     </motion.div>
