@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 function Loader() {
   const [color, setColor] = useState("white");
   const counterRef = useRef(null);
+  const delay = 1000;
 
   function startCounter() {
     let counterVal = 0;
@@ -16,11 +17,9 @@ function Loader() {
 
       let randomNum = Math.floor(Math.random() * 10);
       if (randomNum < 3) {
-        setColor("#CC3039");
-      } else if (randomNum > 3 && randomNum < 6) {
-        setColor("#1F5C9F");
-      } else {
         setColor("white");
+      } else {
+        setColor("#A3E635");
       }
 
       if (counterVal > 100) {
@@ -38,15 +37,21 @@ function Loader() {
   }
 
   useEffect(() => {
-    startCounter();
+    setTimeout(() => {
+      startCounter();
+    }, delay);
   }, []);
 
   return (
     <motion.div
       initial={{ y: 0 }}
       animate={{ y: "-100%" }}
-      transition={{ ease: [0.25, 1, 0.5, 1], delay: 2.6, duration: 0.6 }}
-      className="loader p-8 h-screen w-full fixed top-0 left-0 flex flex-col gap-x-0.5 justify-between bg-zinc-950"
+      transition={{
+        ease: [0.25, 1, 0.5, 1],
+        delay: 3.6,
+        duration: 0.6,
+      }}
+      className="loader p-8 h-screen w-full fixed top-0 left-0 flex flex-col gap-x-0.5 justify-between bg-charcoal"
       id="loader"
     >
       <div className="name-holder relative flex flex-col justify-center">
@@ -72,12 +77,17 @@ function Loader() {
         </div>
       </div>
 
-      <div className="counter-holder flex justify-end items-center">
-        <h4
+      <div className="counter-holder flex justify-end items-center relative overflow-hidden">
+        <motion.h4
           className="counter font-spaceGrotesk text-white font-extrabold text-[30vw] leading-[30vw] md:text-[20vw] md:leading-[20vw] lg:text-[14vw] lg:leading-[14vw]"
           ref={counterRef}
           style={{ color: color }}
-        ></h4>
+          initial={{ y: "100%" }}
+          animate={{ y: 0 }}
+          transition={{ ease: [0.25, 1, 0.5, 1], delay: 0.2, duration: 1 }}
+        >
+          0
+        </motion.h4>
       </div>
     </motion.div>
   );
