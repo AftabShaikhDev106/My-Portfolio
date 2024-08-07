@@ -15,6 +15,7 @@ export default {
         limeGreen: "#A3E635",
         lightGray: "#E5E5E5",
         gray: "#B3B3B3",
+        white: "#fff",
       },
     },
   },
