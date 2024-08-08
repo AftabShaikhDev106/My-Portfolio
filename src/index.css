@@ -67,3 +67,31 @@
   transition: transform ease .3s;
 } */
 
+.section{
+  min-height: 100vh;
+  width: 100%;
+  height: fit-content;
+}
+
+.section.page1{
+  min-height: 90vh;
+}
+
+.button-v1 .icon *{
+  opacity: 0;
+  transform-origin: center;
+} 
+
+.button-v1 .icon {
+  transform: scale(.3);
+  transition: all ease .3s;
+  transform-origin: center;
+} 
+
+.button-v1:hover .icon, .button-v1:active .icon, .button-v1:focus .icon{
+transform: scale(1);
+}
+
+.button-v1:hover .icon *, .button-v1:active .icon *, .button-v1:focus .icon *{
+opacity: 1;
+}

@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import Loader from "./Components/Loader";
 import Navbar from "./Components/Navbar";
 import gsap from "gsap";
+import HeroPage from "./Components/HeroPage";
 
 function App() {
-  const [mouse, useMouse] = useState({ x: 0, y: 0 });
   const [complete, setComplete] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+
   const handleAnimationComplete = async (text) => {
     setComplete(true);
   };
@@ -13,22 +15,30 @@ function App() {
   useEffect(() => {
     const lerp = (x, y, a) => x * (1 - a) + y * a;
 
-    let main = document.querySelector(".main");
-    document.addEventListener("mousemove", (e) => {
+    const updateScrollY = () => {
+      setScrollY(window.scrollY);
+    };
+
+    const handleMouseMove = (e) => {
       gsap.to(".mouse", {
         x: `${e.clientX - 12}px`,
-        y: `${e.clientY - 12}px`,
+        y: `${e.clientY + scrollY - 12}px`,
         ease: "expo.out",
         opacity: 1,
       });
-    });
+    };
 
-    main.addEventListener("mouseleave", () => {
+    const handleMouseLeave = () => {
       gsap.to(".mouse", {
         opacity: 0,
         ease: "expo.out",
       });
-    });
+    };
+
+    let main = document.querySelector(".main");
+    main.addEventListener("mousemove", handleMouseMove);
+    main.addEventListener("mouseleave", handleMouseLeave);
+    window.addEventListener("scroll", updateScrollY);
 
     let linkItem = document.querySelectorAll(".link-cover");
     linkItem.forEach((item, index) => {
@@ -44,15 +54,16 @@ function App() {
         var rangeY = gsap.utils.mapRange(yStart, yEnd, 0, 1, e.clientY);
 
         gsap.to(".mouse", {
-          scale: 7,
+          scale: 6,
         });
+
         gsap.to(".link-cover", {
-          zIndex: 60,
+          zIndex: 5,
         });
 
         gsap.to(item, {
-          x: lerp(-30, 30, rangeX),
-          y: lerp(-30, 30, rangeY),
+          x: lerp(-25, 25, rangeX),
+          y: lerp(-25, 25, rangeY),
           fontWeight: 700,
         });
       });
@@ -73,18 +84,27 @@ function App() {
         });
       });
     });
-  }, []);
+
+    return () => {
+      main.removeEventListener("mousemove", handleMouseMove);
+      main.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("scroll", updateScrollY);
+    };
+  }, [scrollY]);
 
   return (
     <>
       <div
         id="main"
-        className="main h-fit min-h-screen w-full relative bg-darkGray overflow-hidden "
+        className={`main ${
+          complete ? "h-fit" : "h-screen"
+        } w-full relative bg-darkGray overflow-hidden `}
       >
-        <div className="mouse h-5 w-5 scale-1 opacity-0 hidden bg-white absolute z-40 rounded-full select-none pointer-events-none lg:block"></div>
+        <div className="mouse h-5 w-5 scale-1 opacity-0 hidden bg-black absolute z-40 rounded-full select-none pointer-events-none lg:block"></div>
 
         <Loader complete={handleAnimationComplete} />
         <Navbar complete={complete} />
+        <HeroPage complete={complete} />
       </div>
     </>
   );

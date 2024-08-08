@@ -56,7 +56,7 @@ function Loader(props) {
         duration: 0.6,
       }}
       onAnimationComplete={() => props.complete("complete")}
-      className="loader p-8 h-screen w-full fixed top-0 left-0 z-30 flex flex-col gap-x-0.5 justify-between bg-charcoal"
+      className="loader p-8 h-screen w-full fixed top-0 left-0 z-50 flex flex-col gap-x-0.5 justify-between bg-charcoal"
       id="loader"
     >
       <div className="name-holder relative flex flex-col justify-center">

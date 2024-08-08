@@ -235,15 +235,15 @@ function Navbar(props) {
       gsap.to(".logo-text", {
         y: 0,
         opacity: 1,
-        stagger: 0.08,
-        ease: "expo.out",
+        stagger: 0.03,
+        duration: 1,
       });
     }
   }, [props.complete]);
 
   return (
     <>
-      <div className="nav-info w-full h-screen fixed bg-charcoal -top-full flex flex-col justify-end gap-[2%] ">
+      <div className="nav-info w-full h-screen fixed z-30 bg-charcoal -top-full flex flex-col justify-end gap-[2%] ">
         <div className="nav-links w-full h-[65%] flex flex-col items-center justify-between">
           {links.map((link, index) => (
             <div
@@ -260,19 +260,19 @@ function Navbar(props) {
             </div>
           ))}
         </div>
-        <div className="nav-links w-full h-[20%] p-[8vw] border-t-2 border-gray">
+        <div className="nav-links w-full h-[20%] p-[7vw] border-t-2 border-gray">
           <div className="profile-con w-full h-full flex overflow-hidden">
             <div className="personal-info-image h-full aspect-square scale-0 bg-slate-50 rounded-full">
               <div className="img h-full w-full"></div>
             </div>
             <div className="content w-[80%] h-full flex flex-col items-start justify-center pl-[5vw]">
               <h4 className="font-bold font-spaceGrotesk text-[5.5vw] h-fit leading-none text-white overflow-hidden">
-                <span className="personal-info-text block translate-y-full">
+                <span className="personal-info-text block translate-y-full pb-2">
                   Aftab Shaikh
                 </span>
               </h4>
               <h4 className=" font-semibold font-spaceGrotesk text-gray h-fit text-[4.5vw] overflow-hidden">
-                <span className="personal-info-text block translate-y-full">
+                <span className="personal-info-text block translate-y-full pb-2">
                   FrontEnd Developer
                 </span>
               </h4>
@@ -280,7 +280,7 @@ function Navbar(props) {
           </div>
         </div>
       </div>
-      <nav className=" py-[4vw] w-full px-[8vw] flex items-center justify-between md:py-[2vw] md:px-[4vw]">
+      <nav className=" py-[7vw] w-full px-[8vw] flex items-center justify-between md:py-[2vw] md:px-[4vw] lg:py-[1vw] relative lg:z-[3]">
         <div className="logo flex flex-col">
           <span className="overflow-hidden">
             <h4 className="logo-text translate-y-full text-white uppercase select-none font-spaceGrotesk text-[5.3vw] leading-[6vw] tracking-wider font font-medium md:text-[4vw] md:leading-tight lg:text-[1.5vw] lg:leading-tight cursor-pointer">
@@ -307,7 +307,7 @@ function Navbar(props) {
         </div>
 
         <div
-          className="menu flex items-center  h-[8vw] md:h-[6vw] lg:hidden"
+          className="menu flex items-center relative z-40  h-[8vw] md:h-[6vw] lg:hidden"
           onClick={handleMenu}
         >
           <div className="stick-cover h-full flex flex-col items-center w-[11vw] justify-center relative z-20 overflow-hidden md:w-[9vw] ">
