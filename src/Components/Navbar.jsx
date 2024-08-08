@@ -280,7 +280,7 @@ function Navbar(props) {
           </div>
         </div>
       </div>
-      <nav className=" py-[6vw] w-full px-[8vw] flex items-center justify-between md:py-[2vw] md:px-[4vw]">
+      <nav className=" py-[4vw] w-full px-[8vw] flex items-center justify-between md:py-[2vw] md:px-[4vw]">
         <div className="logo flex flex-col">
           <span className="overflow-hidden">
             <h4 className="logo-text translate-y-full text-white uppercase select-none font-spaceGrotesk text-[5.3vw] leading-[6vw] tracking-wider font font-medium md:text-[4vw] md:leading-tight lg:text-[1.5vw] lg:leading-tight cursor-pointer">
@@ -297,8 +297,8 @@ function Navbar(props) {
         <div className="links hidden h-full items-center lg:flex">
           <ul className="flex gap-[4vw] items-center">
             {links.map((li, index) => (
-              <li key={index} className="overflow-hidden">
-                <span className="link-item font-spaceGrotesk uppercase text-white text-[1.1vw] py-1 relative cursor-pointer hover:text-limeGreen transition-all ease-linear duration-[.3] flex justify-center align-center translate-y-full opacity-0">
+              <li key={index} className="link-cover h-full overflow-hidden">
+                <span className="link-item font-spaceGrotesk uppercase text-white font-bold text-[1.1vw] py-1 relative cursor-pointer hover:text-limeGreen transition-all ease-linear duration-[.3] flex justify-center align-center translate-y-full opacity-0">
                   {li}
                 </span>
               </li>

@@ -12,7 +12,7 @@
   border-radius: 10px;
 }
 
-.link-item::after{
+/* .link-item::after{
   content: "";
   position: absolute;
   height: 1.5px;
@@ -65,5 +65,5 @@
   transform: scale(1);
   transform-origin: top;
   transition: transform ease .3s;
-}
+} */
 
