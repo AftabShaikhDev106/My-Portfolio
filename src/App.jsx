@@ -1,30 +1,41 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Loader from "./Components/Loader";
 import Navbar from "./Components/Navbar";
+import HomeCom from "./Components/HomeCom";
+import useLocoScroll from "./useLocoScroll";
 import gsap from "gsap";
-import HeroPage from "./Components/HeroPage";
 
 function App() {
-  const [complete, setComplete] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
+  useLocoScroll(true);
 
-  const handleAnimationComplete = async (text) => {
+  const [complete, setComplete] = useState(false);
+  // const [navComplete, setNavComplete] = useState(false);
+  const mouseDets = useRef({ x: 0, y: 0 });
+
+  const handleAnimationCompleteLoader = async (text) => {
     setComplete(true);
   };
 
+  // const handleAnimationCompleteNav = async (text) => {
+  //   setNavComplete(true);
+  // };
+
   useEffect(() => {
+    gsap.set(".nav-info", {
+      y: "-100%",
+    });
+
     const lerp = (x, y, a) => x * (1 - a) + y * a;
 
-    const updateScrollY = () => {
-      setScrollY(window.scrollY);
-    };
-
     const handleMouseMove = (e) => {
+      mouseDets.current = { x: e.clientX, y: e.clientY };
+
       gsap.to(".mouse", {
-        x: `${e.clientX - 12}px`,
-        y: `${e.clientY + scrollY - 12}px`,
+        x: `${e.clientX - 6}px`,
+        y: `${e.clientY - 6 + window.scrollY}px`,
         ease: "expo.out",
         opacity: 1,
+        overwrite: "auto",
       });
     };
 
@@ -35,42 +46,68 @@ function App() {
       });
     };
 
+    const handleScroll = () => {
+      gsap.to(".mouse", {
+        y: `${mouseDets.current.y - 6 + window.scrollY}px`,
+        ease: "expo.out",
+        overwrite: "auto",
+      });
+    };
+
     let main = document.querySelector(".main");
     main.addEventListener("mousemove", handleMouseMove);
     main.addEventListener("mouseleave", handleMouseLeave);
-    window.addEventListener("scroll", updateScrollY);
+    window.addEventListener("scroll", handleScroll);
 
-    let linkItem = document.querySelectorAll(".link-cover");
-    linkItem.forEach((item, index) => {
+    let linkItems = document.querySelectorAll(".link-cover");
+    linkItems.forEach((item) => {
       item.addEventListener("mousemove", (e) => {
-        var dims = item.getBoundingClientRect();
-        var xStart = dims.x;
-        var xEnd = dims.x + dims.width;
-
-        var yStart = dims.y;
-        var yEnd = dims.y + dims.height;
-
-        var rangeX = gsap.utils.mapRange(xStart, xEnd, 0, 1, e.clientX);
-        var rangeY = gsap.utils.mapRange(yStart, yEnd, 0, 1, e.clientY);
+        const dims = item.getBoundingClientRect();
+        const rangeX = gsap.utils.mapRange(
+          dims.x,
+          dims.x + dims.width,
+          0,
+          1,
+          e.clientX
+        );
+        const rangeY = gsap.utils.mapRange(
+          dims.y,
+          dims.y + dims.height,
+          0,
+          1,
+          e.clientY
+        );
 
         gsap.to(".mouse", {
-          scale: 6,
-        });
-
-        gsap.to(".link-cover", {
-          zIndex: 5,
+          scale: 10,
+          duration: 0.5,
         });
 
         gsap.to(item, {
-          x: lerp(-25, 25, rangeX),
-          y: lerp(-25, 25, rangeY),
+          x: lerp(-20, 20, rangeX),
+          y: lerp(-20, 20, rangeY),
           fontWeight: 700,
+          overwrite: "auto",
+        });
+      });
+
+      item.addEventListener("mouseenter", () => {
+        gsap.to(".link-cover", {
+          zIndex: 50,
+        });
+
+        gsap.to(".mouse", {
+          scale: 10,
+          duration: 0.5,
+          overwrite: "auto",
         });
       });
 
       item.addEventListener("mouseleave", () => {
         gsap.to(".mouse", {
           scale: 1,
+          duration: 0.5,
+          overwrite: "auto",
         });
 
         gsap.to(".link-cover", {
@@ -81,6 +118,8 @@ function App() {
           x: 0,
           y: 0,
           ease: "elastic.out",
+          duration: 1.5,
+          overwrite: "auto",
         });
       });
     });
@@ -88,23 +127,48 @@ function App() {
     return () => {
       main.removeEventListener("mousemove", handleMouseMove);
       main.removeEventListener("mouseleave", handleMouseLeave);
-      window.removeEventListener("scroll", updateScrollY);
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, [scrollY]);
+  }, []);
+
+  useEffect(() => {
+    let buttons = document.querySelectorAll(".button-v1");
+    buttons.forEach((btn) => {
+      btn.addEventListener("mouseenter", () => {
+        gsap.to(".mouse", {
+          scale: 5,
+          duration: 0.5,
+          mixBlendMode: "difference",
+        });
+      });
+
+      btn.addEventListener("mouseleave", () => {
+        gsap.to(".mouse", {
+          scale: 1,
+          duration: 0.5,
+          mixBlendMode: "normal",
+        });
+      });
+    });
+  }, []);
 
   return (
     <>
       <div
         id="main"
         className={`main ${
-          complete ? "h-fit" : "h-screen"
-        } w-full relative bg-darkGray overflow-hidden `}
+          complete ? "h-fit" : "h-[100svh]"
+        } w-full relative bg-darkGray overflow-hidden ${
+          complete ? "lg:h-fit" : "lg:h-[100vh]"
+        }`}
+        data-scroll
+        data-scroll-section
       >
-        <div className="mouse h-5 w-5 scale-1 opacity-0 hidden bg-black absolute z-40 rounded-full select-none pointer-events-none lg:block"></div>
+        <div className="mouse h-3 w-3 scale-1 opacity-0 hidden bg-white z-[3] absolute rounded-full select-none pointer-events-none lg:block"></div>
 
-        <Loader complete={handleAnimationComplete} />
+        <Loader complete={handleAnimationCompleteLoader} />
         <Navbar complete={complete} />
-        <HeroPage complete={complete} />
+        <HomeCom complete={complete} />
       </div>
     </>
   );
