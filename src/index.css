@@ -16,6 +16,10 @@
   display: none;
 }
 
+body{
+  scroll-behavior: smooth; 
+}
+
 /* .link-item::after{
   content: "";
   position: absolute;
@@ -108,4 +112,32 @@ opacity: 1;
   height: 150%;
   bottom: -25%;
   top: unset;
+}
+
+.second-nav-control::after{
+  content: " ";
+  position: absolute;
+  height: 0;
+  width: 150%;
+  top: -75%;
+  left: -25%;
+  background-color: #A3E635;
+  border-radius: 50%;
+  z-index: -1;
+  transition: all ease .5s;
+}
+
+.second-nav-control:hover:after{
+  height: 250%;
+  top: unset;
+  bottom: -75%;
+}
+
+.no-scroll{
+  overflow: hidden !important; 
+}
+
+.eye-ball{
+  border-radius: 100% 0px;
+  transform: rotate(45deg);
 }
