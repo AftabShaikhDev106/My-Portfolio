@@ -6,11 +6,8 @@ import Loader from "./Components/Loader";
 import Navbar from "./Components/Navbar";
 import HomeCom from "./Components/HomeCom";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import link1 from "./images/link-1.jpg";
-import link2 from "./images/link-2.jpg";
-import link3 from "./images/link-3.jpg";
-import link4 from "./images/link-4.jpg";
 import { FaArrowUpLong } from "react-icons/fa6";
+import { GoArrowRight } from "react-icons/go";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -21,14 +18,15 @@ function App() {
   const [navOpen, setNavOpen] = useState(false);
   const mouseDets = useRef({ x: 0, y: 0 });
   const [isScrollLocked, setIsScrollLocked] = useState(false);
+  const [clickMenu, setClickMenu] = useState(true);
   const [scrollPosition, setScrollPosition] = useState({ top: 0, left: 0 });
 
   const links = ["Home", "About", "Products", "Contact"];
 
-  const imageSrc = [link1, link2, link3, link4];
-
   const scrollTriggersRef = useRef([]);
   const scrollBackBtn = useRef(null);
+  const mouseRef = useRef(null);
+  const number = useRef(null);
 
   const lerp = (x, y, a) => x * (1 - a) + y * a;
 
@@ -46,111 +44,106 @@ function App() {
   };
 
   const toggleBigNav = () => {
-    if (!navOpen) {
-      setScrollPosition({
-        top: window.scrollY,
-        left: window.scrollX,
-      });
+    if (clickMenu) {
+      if (!navOpen) {
+        setScrollPosition({
+          top: window.scrollY,
+          left: window.scrollX,
+        });
 
-      setIsScrollLocked(true);
-      setNavOpen(true);
+        setIsScrollLocked(true);
+        setNavOpen(true);
 
-      // Kill all ScrollTrigger instances
-      scrollTriggersRef.current.forEach((trigger) => trigger.kill());
-      scrollTriggersRef.current = []; // Clear the array after killing
-    } else {
-      // Unfreeze the scroll
-      setIsScrollLocked(false);
-      setNavOpen(false);
+        // Kill all ScrollTrigger instances
+        scrollTriggersRef.current.forEach((trigger) => trigger.kill());
+        scrollTriggersRef.current = []; // Clear the array after killing
+      } else {
+        // Unfreeze the scroll
 
-      // Recreate ScrollTrigger instances after unlocking the scroll
+        // Recreate ScrollTrigger instances after unlocking the scroll
 
-      const tl = gsap.timeline({ paused: true });
+        const tl = gsap.timeline({ paused: true });
 
-      scrollTriggersRef.current = [
-        ScrollTrigger.create({
-          trigger: "nav",
-          start: "top -30%",
-          end: "bottom -30%",
-          scrub: 2,
-          onUpdate: (self) => {
-            if (self.progress > 0.5) {
-              gsap.to(".second-nav-control", {
-                scale: 1,
-                opacity: 1,
-                onComplete: () => {
-                  tl.clear();
-                  tl.to(
-                    ".top-lid",
-                    {
-                      top: "-100%",
-                      duration: 2, // Smooth transition
-                      ease: "power2.out", // Smooth easing function
-                    },
-                    "a"
-                  );
-                  tl.to(
-                    ".bottom-lid",
-                    {
-                      bottom: "-100%",
-                      duration: 2, // Smooth transition
-                      ease: "power2.out", // Smooth easing function
-                    },
-                    "a"
-                  );
-                  tl.play();
-                },
-              });
-            } else {
-              gsap.to(".second-nav-control", {
-                scale: 0,
-                opacity: 0,
-                onComplete: () => {
-                  tl.clear();
-                  tl.to(
-                    ".top-lid",
-                    {
-                      top: 0,
-                      duration: 0, // Smooth transition
-                      ease: "power2.out", // Smooth easing function
-                    },
-                    "a"
-                  );
-                  tl.to(
-                    ".bottom-lid",
-                    {
-                      bottom: 0,
-                      duration: 0, // Smooth transition
-                      ease: "power2.out", // Smooth easing function
-                    },
-                    "a"
-                  );
-                  tl.play();
-                },
-              });
-            }
-          },
-        }),
-      ];
+        scrollTriggersRef.current = [
+          ScrollTrigger.create({
+            trigger: "nav",
+            start: "top -30%",
+            end: "bottom -30%",
+            scrub: 2,
+            onUpdate: (self) => {
+              if (self.progress > 0.5) {
+                gsap.to(".second-nav-control", {
+                  scale: 1,
+                  opacity: 1,
+                  onComplete: () => {
+                    tl.clear();
+                    tl.to(
+                      ".top-lid",
+                      {
+                        top: "-100%",
+                        duration: 2, // Smooth transition
+                        ease: "power2.out", // Smooth easing function
+                      },
+                      "a"
+                    );
+                    tl.to(
+                      ".bottom-lid",
+                      {
+                        bottom: "-100%",
+                        duration: 2, // Smooth transition
+                        ease: "power2.out", // Smooth easing function
+                      },
+                      "a"
+                    );
+                    tl.play();
+                  },
+                });
+              } else {
+                gsap.to(".second-nav-control", {
+                  scale: 0,
+                  opacity: 0,
+                  onComplete: () => {
+                    tl.clear();
+                    tl.to(
+                      ".top-lid",
+                      {
+                        top: 0,
+                        duration: 0, // Smooth transition
+                        ease: "power2.out", // Smooth easing function
+                      },
+                      "a"
+                    );
+                    tl.to(
+                      ".bottom-lid",
+                      {
+                        bottom: 0,
+                        duration: 0, // Smooth transition
+                        ease: "power2.out", // Smooth easing function
+                      },
+                      "a"
+                    );
+                    tl.play();
+                  },
+                });
+              }
+            },
+          }),
+        ];
 
-      // Refresh ScrollTrigger after reinitialization
-      ScrollTrigger.refresh();
+        setIsScrollLocked(false);
+        setNavOpen(false);
+
+        // Refresh ScrollTrigger after reinitialization
+        ScrollTrigger.refresh();
+      }
     }
   };
 
   useEffect(() => {
     let mainElement = document.querySelector("#main");
-    const bigLinks = document.querySelectorAll(".big-links");
-
-    const slider = (index) => {
-      gsap.to(".image-container", {
-        y: `-${100 * index}%`,
-        ease: "expo.out",
-        duration: 1,
-      });
-    };
 
     if (isScrollLocked) {
+      setClickMenu(false);
       gsap.to(".big-nav", {
         right: 0,
         ease: "expo.out",
@@ -160,9 +153,23 @@ function App() {
           mainElement.style.top = `-${scrollPosition.top}px`;
           mainElement.style.left = `-${scrollPosition.left}px`;
 
-          tl.to(".line", {
-            width: "100%",
-          });
+          tl.to(
+            ".line",
+            {
+              width: "100%",
+            },
+            "a"
+          );
+
+          gsap.to(
+            ".cylinder-btn",
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 0.5,
+            },
+            "a"
+          );
 
           tl.to(".big-link-span", {
             y: 0,
@@ -170,20 +177,11 @@ function App() {
             stagger: 0.03,
           });
 
-          tl.to(".link-card", {
+          tl.to(".count", {
             opacity: 1,
-            ease: "expo.in",
-            duration: 0.5,
+            duration: 1,
             onComplete: () => {
-              bigLinks.forEach((link, index) => {
-                link.addEventListener("mouseenter", () => slider(index));
-              });
-
-              return () => {
-                bigLinks.forEach((link, index) => {
-                  link.removeEventListener("mouseenter", () => slider(index));
-                });
-              };
+              setClickMenu(true);
             },
           });
         },
@@ -195,10 +193,11 @@ function App() {
       mainElement.style.left = "0";
       window.scrollTo(scrollPosition.left, scrollPosition.top);
 
-      tl.to(".link-card", {
+      setClickMenu(false);
+
+      tl.to(".count", {
         opacity: 0,
-        ease: "expo.out",
-        duration: 0.5,
+        duration: 1,
       });
 
       tl.to(".big-link-span", {
@@ -206,18 +205,30 @@ function App() {
         opacity: 0,
       });
 
-      tl.to(".line", {
-        width: 0,
-      });
+      tl.to(
+        ".line",
+        {
+          width: 0,
+        },
+        "a"
+      );
+
+      tl.to(
+        ".cylinder-btn",
+        {
+          scale: 0,
+          opacity: 0,
+          duration: 0.5,
+        },
+        "a"
+      );
 
       tl.to(".big-nav", {
         right: "-100%",
         ease: "expo.out",
         duration: 1,
         onComplete: () => {
-          bigLinks.forEach((link, index) => {
-            link.removeEventListener("mouseenter", slider);
-          });
+          setClickMenu(true);
         },
       });
 
@@ -368,7 +379,7 @@ function App() {
     const handleMouseMove = (e) => {
       mouseDets.current = { x: e.clientX, y: e.clientY };
 
-      gsap.to(".mouse", {
+      gsap.to(mouseRef.current, {
         x: `${e.clientX - 6}px`,
         y: `${e.clientY - 6 + window.scrollY}px`,
         ease: "expo.out",
@@ -378,14 +389,14 @@ function App() {
     };
 
     const handleMouseLeave = () => {
-      gsap.to(".mouse", {
+      gsap.to(mouseRef.current, {
         opacity: 0,
         ease: "expo.out",
       });
     };
 
     const handleScroll = () => {
-      gsap.to(".mouse", {
+      gsap.to(mouseRef.current, {
         y: `${mouseDets.current.y - 6 + window.scrollY}px`,
         ease: "expo.out",
         overwrite: "auto",
@@ -416,7 +427,7 @@ function App() {
           e.clientY
         );
 
-        gsap.to(".mouse", {
+        gsap.to(mouseRef.current, {
           scale: 10,
           duration: 0.5,
         });
@@ -434,7 +445,7 @@ function App() {
           zIndex: 50,
         });
 
-        gsap.to(".mouse", {
+        gsap.to(mouseRef.current, {
           scale: 10,
           duration: 0.5,
           overwrite: "auto",
@@ -442,7 +453,7 @@ function App() {
       });
 
       item.addEventListener("mouseleave", () => {
-        gsap.to(".mouse", {
+        gsap.to(mouseRef.current, {
           scale: 1,
           duration: 0.5,
           overwrite: "auto",
@@ -480,7 +491,7 @@ function App() {
     const buttons = document.querySelectorAll(".button-v1");
     buttons.forEach((btn) => {
       btn.addEventListener("mouseenter", () => {
-        gsap.to(".mouse", {
+        gsap.to(mouseRef.current, {
           scale: 5,
           duration: 0.5,
           mixBlendMode: "difference",
@@ -488,7 +499,7 @@ function App() {
       });
 
       btn.addEventListener("mouseleave", () => {
-        gsap.to(".mouse", {
+        gsap.to(mouseRef.current, {
           scale: 1,
           duration: 0.5,
           mixBlendMode: "normal",
@@ -555,50 +566,106 @@ function App() {
     circleBtn.addEventListener("mousemove", handleMouseMove);
     circleBtn.addEventListener("mouseleave", handleMouseLeave);
 
+    const projectShowcase = document.querySelectorAll(".project-showcase");
+
+    projectShowcase.forEach((show) => {
+      show.addEventListener("mouseenter", () => {
+        if (mouseRef.current) {
+          gsap.to(mouseRef.current, {
+            scale: 8,
+            backgroundColor: "#A3E635",
+            duration: 0.5,
+            ease: "power2.out",
+            onStart: () => {
+              gsap.set(".mouse-text", {
+                scale: 0.13,
+              });
+
+              gsap.to(".mouse-text", {
+                opacity: 1,
+                duration: 0.3,
+              });
+            },
+          });
+        }
+      });
+
+      show.addEventListener("mouseleave", () => {
+        gsap.to(mouseRef.current, {
+          scale: 1,
+          backgroundColor: "white",
+          duration: 0.5,
+          ease: "power2.out",
+          onStart: () => {
+            gsap.to(".mouse-text", {
+              opacity: 0,
+              duration: 0,
+            });
+          },
+        });
+      });
+    });
+
+    const bigLinks = document.querySelectorAll(".big-links");
+
+    bigLinks.forEach((link, index) => {
+      link.addEventListener("mouseenter", () => {
+        number.current.innerText = index + 1;
+      });
+    });
+
     return () => {
       circleBtn.removeEventListener("mousemove", handleMouseMove);
       circleBtn.removeEventListener("mouseleave", handleMouseLeave);
+      bigLinks.forEach((link, index) => {
+        link.addEventListener("mouseenter", null);
+      });
     };
   }, []);
 
   return (
     <>
-      <div className="mouse h-3 w-3 scale-1 opacity-0 hidden bg-white z-[3] absolute rounded-full select-none pointer-events-none lg:block"></div>
+      <div
+        ref={mouseRef}
+        className="mouse h-3 w-3 scale-1 opacity-0 hidden bg-white z-[3] absolute rounded-full lg:flex justify-center items-center select-none pointer-events-none"
+      >
+        <div className="mouse-text bright-sm font-spaceGrotesk text-white origin-center font-semibold text-[1.2vw] opacity-0 leading-none ">
+          Visit
+        </div>
+      </div>
 
-      <div className="big-nav z-60 h-screen w-full fixed top-0 hidden lg:flex bg-charcoal z-50 p-20">
-        <div className="cover-container h-full w-full ">
-          <ul className="big-nav-ul h-full w-full">
-            <div className="link-card h-[10vw] w-[10vw] opacity-0 absolute bottom-0 right-0 flex flex-col overflow-hidden pointer-events-none">
-              {links.map((li, index) => (
-                <div
-                  key={index}
-                  className="image-container h-full w-full p-5 shrink-0 flex justify-center items-center text-white text-[2vw] pointer-events-none overflow-hidden"
-                >
-                  <img
-                    src={imageSrc[index]}
-                    className="h-full w-full object-cover rounded-lg"
-                    alt=""
-                  />
-                  {/* {li} */}
-                </div>
-              ))}
-            </div>
+      <div className="big-nav z-60 h-screen w-full fixed top-0 hidden lg:flex justify-center items-center bg-charcoal z-50 p-20">
+        <div className="count absolute p-5 flex gap-2 opacity-0">
+          <span className="static-zero text-[50vw] font-spaceGrotesk text-line leading-none font-extrabold">
+            0
+          </span>
+          <span
+            ref={number}
+            className="change-num text-[50vw] font-spaceGrotesk text-line leading-none font-extrabold"
+          >
+            1
+          </span>
+        </div>
+        <div className="cover-container h-full w-full">
+          <ul className="big-nav-ul h-full w-full flex flex-col justify-center">
             {links.map((li, index) => (
               <li
                 key={index}
-                className={`big-links h-[25%] w-full border-gray flex relative items-center p-10 cursor-pointer overflow-hidden text-white hover:text-limeGreen transition-all ease-in-out duration-300 `}
+                className={`big-links h-[20%] w-full border-gray flex justify-between relative items-center p-12 cursor-pointer overflow-hidden text-gray `}
               >
-                {index < links.length - 1 && (
-                  <div className="line bg-gray h-[2px] w-0 absolute bottom-0 right-0 rounded-3xl"></div>
-                )}
+                <div className="line bg-gray h-[2px] w-0 absolute bottom-0 right-0 rounded-3xl"></div>
 
-                <h1 className=" font-spaceGrotesk font-bold text-[6vw] leading-none">
+                <h1 className=" font-spaceGrotesk font-bold text-[5vw] leading-none">
                   {li.split("").map((letter, index) => (
                     <span className="big-link-span opacity-0" key={index}>
                       {letter}
                     </span>
                   ))}
                 </h1>
+
+                <div className="cylinder-btn  relative overflow-hidden border-2 border-inherit px-7 py-2 rounded-full text-[1.5vw] ">
+                  <GoArrowRight />
+                </div>
               </li>
             ))}
           </ul>
@@ -607,10 +674,10 @@ function App() {
 
       <div
         onClick={toggleBigNav}
-        className="second-nav-control bg-charcoal fixed top-[4.3vw] hidden right-[4.6vw] cursor-pointer flex items-center justify-center z-[51] box-content h-[8vw] aspect-square overflow-hidden rounded-full py-4 px-4 shadow-[0_0_30px_8px_rgba(0,0,0,0.5)] md:h-[6vw] lg:top-[3vw] lg:right-[3vw] lg:flex lg:box-content lg:h-[3vw] active:bg-charcoal"
+        className="second-nav-control bg-charcoal fixed top-[4.3vw] hidden right-[4.6vw] cursor-pointer items-center justify-center z-[51] box-content h-[8vw] aspect-square overflow-hidden rounded-full py-4 px-4 shadow-[0_0_30px_8px_rgba(0,0,0,0.5)] md:h-[6vw] lg:top-[3vw] lg:right-[3vw] lg:flex lg:box-content lg:h-[3vw] active:bg-charcoal"
       >
         <div className="top-lid absolute h-1/2 w-full bg-charcoal z-10"></div>
-        <div className="eye-ball overflow-hidden bg-white h-full w-full aspect-square rounded-full flex justify-center items-center">
+        <div className="eye-ball overflow-hidden bg-white h-full w-full aspect-square bright-lg rounded-full flex justify-center items-center">
           <div className="eye-cover w-1/2 h-1/2 origin-center bg-charcoal rounded-full"></div>
         </div>
         <div className="bottom-lid absolute h-1/2 w-full bg-charcoal z-10"></div>

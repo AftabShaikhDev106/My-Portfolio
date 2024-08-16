@@ -20,6 +20,31 @@ body{
   scroll-behavior: smooth; 
 }
 
+.bright-sm{
+  text-shadow: 0px 0px 3px white;
+}
+
+.bright-normal{
+  text-shadow: 0px 0px 5px white;
+}
+
+.bright-lg{
+  text-shadow: 0px 0px 8px white;
+}
+
+.bright-lime-sm{
+  text-shadow: 0px 0px 3px #A3E635;
+}
+
+.bright-lime-normal{
+  text-shadow: 0px 0px 5px #A3E635;
+}
+
+.bright-lime-lg{
+  text-shadow: 0px 0px 8px #A3E635;
+}
+
+
 /* .link-item::after{
   content: "";
   position: absolute;
@@ -140,4 +165,45 @@ opacity: 1;
 .eye-ball{
   border-radius: 100% 0px;
   transform: rotate(45deg);
+}
+
+.big-links:hover{
+  color: white;
+  border-color: white;
+  
+  
+}
+
+.big-links:hover h1{
+  text-shadow: 0px 0px 4px white;
+  transition: all ease .5s;
+}
+
+.big-links:hover .cylinder-btn > *{
+  color: black;
+  transition: all ease .5s;
+}
+
+.cylinder-btn{
+  z-index: 0;
+}
+
+.cylinder-btn::after{
+  content: "";
+  position: absolute;
+  height: 0;
+  width: 150%;
+  background-color: white;
+  top: -75%;
+  left: -25%;
+  z-index: -1;
+  transition: all ease .5s;
+  border-radius: 50%;
+}
+
+
+.big-links:hover .cylinder-btn::after{
+  top: unset;
+  height: 250%;
+  bottom: -75%;
 }

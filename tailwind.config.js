@@ -16,6 +16,7 @@ export default {
         lightGray: "#E5E5E5",
         gray: "#B3B3B3",
         white: "#fff",
+        line: "#444444",
       },
     },
   },

@@ -267,7 +267,7 @@ function Navbar(props) {
                   {link.split("").map((li, index) => (
                     <span
                       key={index}
-                      className="link-span translate-y-full py-2"
+                      className="link-span bright-sm translate-y-full py-2"
                     >
                       {li}
                     </span>
@@ -282,7 +282,7 @@ function Navbar(props) {
                 <div className="img h-full w-full"></div>
               </div>
               <div className="content w-[80%] h-full flex flex-col items-start justify-center pl-[5vw]">
-                <h4 className="font-bold font-spaceGrotesk text-[5.5vw] h-fit leading-none text-white overflow-hidden">
+                <h4 className="font-bold font-spaceGrotesk text-[5.5vw] h-fit leading-none bright-sm text-white overflow-hidden">
                   <span className="personal-info-text block">Aftab Shaikh</span>
                 </h4>
                 <h4 className=" font-semibold font-spaceGrotesk text-gray h-fit text-[4.5vw] overflow-hidden">
@@ -296,18 +296,18 @@ function Navbar(props) {
         </div>
       </div>
       <nav
-        className=" py-[7vw] w-full px-[8vw] flex items-center justify-between md:py-[2vw] md:px-[4vw] lg:py-[1vw] lg:z-[3]"
+        className=" py-[7vw] w-full px-[8vw] flex items-center justify-between md:py-[2vw] md:px-[4vw] lg:py-[1vw] lg:px-[6vw] lg:z-[3]"
         data-scroll
         data-scroll-section
       >
         <div className="logo flex flex-col">
           <span className="overflow-hidden">
-            <h4 className="logo-text translate-y-full text-white uppercase select-none font-spaceGrotesk text-[5.3vw] leading-[6vw] tracking-wider font-medium md:text-[4vw] md:leading-tight lg:text-[1.5vw] lg:leading-tight cursor-pointer">
+            <h4 className="logo-text translate-y-full bright-sm text-white uppercase select-none font-spaceGrotesk text-[5.3vw] leading-[6vw] tracking-wider font-medium md:text-[4vw] md:leading-tight lg:text-[1.5vw] lg:leading-tight cursor-pointer">
               Aftab{" "}
             </h4>
           </span>
           <span className="overflow-hidden">
-            <h4 className="logo-text translate-y-full text-white uppercase select-none font-spaceGrotesk text-[5.3vw] leading-[6vw] tracking-wider font-medium md:text-[4vw] md:leading-tight lg:text-[1.5vw] lg:leading-tight cursor-pointer">
+            <h4 className="logo-text translate-y-full bright-sm text-white uppercase select-none font-spaceGrotesk text-[5.3vw] leading-[6vw] tracking-wider font-medium md:text-[4vw] md:leading-tight lg:text-[1.5vw] lg:leading-tight cursor-pointer">
               Shaikh{" "}
             </h4>
           </span>
@@ -320,7 +320,7 @@ function Navbar(props) {
                 key={index}
                 className="link-cover h-full overflow-hidden relative "
               >
-                <span className="link-item font-spaceGrotesk uppercase text-white font-bold text-[1.1vw] py-1 relative cursor-pointer hover:text-limeGreen transition-all ease-linear duration-[.3] flex justify-center align-center translate-y-full opacity-0">
+                <span className="link-item bright-sm font-spaceGrotesk uppercase text-white font-bold text-[1.1vw] py-1 relative cursor-pointer hover:text-limeGreen transition-all ease-linear duration-[.3] flex justify-center align-center translate-y-full opacity-0">
                   {li}
                 </span>
               </li>

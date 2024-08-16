@@ -61,7 +61,7 @@ function HeroPage({ complete }) {
               <span
                 className={`oneliner oneliner-${
                   index + 1
-                } block font-spaceGrotesk text-[8vw] leading-[8.5vw] uppercase text-white tracking-wider font-medium md:text-[6vw] md:leading-[6.5vw] lg:text-[4.5vw] lg:leading-[4.5vw]`}
+                } block bright-normal font-spaceGrotesk text-[8vw] leading-[8.5vw] uppercase text-white tracking-wider font-medium md:text-[6vw] md:leading-[6.5vw] lg:text-[4.5vw] lg:leading-[4.5vw]`}
               >
                 {word}
               </span>
@@ -69,7 +69,7 @@ function HeroPage({ complete }) {
           ))}
         </div>
         <div className="cv-btn h-fit w-full flex justify-end">
-          <Buttonv1 text="Download CV" icon={<MdDownload />} />
+          <Buttonv1 text="Download CV" icon={<MdDownload />} download={true} />
         </div>
       </div>
       <div className="bottom-content h-[65svh] w-full relative flex items-end lg:absolute lg:top-0 lg:h-full lg:left-0 lg:z-[1]">

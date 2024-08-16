@@ -79,12 +79,12 @@ function Loader(props) {
     >
       <div className="name-holder relative flex flex-col justify-center">
         <div className="name-cover relative flex flex-col justify-center overflow-hidden">
-          <h4 className="name text-white font-spaceGrotesk text-[10vw] leading-none uppercase tracking-wider font-semibold h-fit md:text-[6vw] lg:text-[4vw] xl:text-[3.5vw]">
+          <h4 className="name text-white bright-normal font-spaceGrotesk text-[10vw] leading-none uppercase tracking-wider font-semibold h-fit md:text-[6vw] lg:text-[4vw] xl:text-[3.5vw]">
             Aftab
           </h4>
         </div>
         <div className="name-cover relative flex flex-col justify-center overflow-hidden">
-          <h4 className="name text-white font-spaceGrotesk text-[10vw] leading-none uppercase tracking-wider font-semibold h-fit md:text-[6vw] lg:text-[4vw] xl:text-[3.5vw]">
+          <h4 className="name text-white bright-normal font-spaceGrotesk text-[10vw] leading-none uppercase tracking-wider font-semibold h-fit md:text-[6vw] lg:text-[4vw] xl:text-[3.5vw]">
             Shaikh
           </h4>
         </div>
@@ -92,7 +92,7 @@ function Loader(props) {
 
       <div className="counter-holder flex h-fit justify-end items-center relative overflow-hidden">
         <h4
-          className="counter font-spaceGrotesk text-limeGreen font-extrabold text-[30vw] leading-[30vw] md:text-[20vw] md:leading-[20vw] lg:text-[14vw] lg:leading-[14vw]"
+          className="counter font-spaceGrotesk text-limeGreen bright-lime-normal font-extrabold text-[30vw] leading-[30vw] md:text-[20vw] md:leading-[20vw] lg:text-[14vw] lg:leading-[14vw]"
           ref={counterRef}
         >
           0

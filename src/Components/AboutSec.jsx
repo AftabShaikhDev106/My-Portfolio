@@ -75,7 +75,7 @@ function AboutSec() {
 
     gsap.fromTo(
       ".animated-letters",
-      { color: "#1A1A1A" }, // Starting state (color gray)
+      { color: "#1A1A1A", textShadow: "0px 0px 0px transparent" }, // Starting state (color gray)
       {
         color: "white", // Ending state (color white)
         scrollTrigger: {
@@ -87,6 +87,7 @@ function AboutSec() {
         },
         stagger: 0.03,
         overwrite: "auto",
+        textShadow: "0px 0px 5px white",
       }
     );
 
@@ -102,7 +103,7 @@ function AboutSec() {
   return (
     <>
       <div
-        className="section page2 p-[7vw] h-fit w-full relative overflow-hidden flex flex-col gap-10 md:gap-20 lg:p-[4vw] lg:gap-14 bg-charcoal rounded-t-lg"
+        className="section data-scroll data-scroll-section page2 p-[7vw] h-fit w-full relative overflow-hidden flex flex-col gap-10 md:gap-20 lg:py-[4vw] lg:px-[6vw] lg:gap-14 bg-charcoal rounded-t-lg"
         // data-scroll
         // data-scroll-speed=""
       >
@@ -126,13 +127,15 @@ function AboutSec() {
           <div className="image-pos  relative flex flex-col justify-between items-end w-full lg:w-1/2">
             <div className="image w-[85%] h-[85%] rounded-md overflow-hidden border-none lg:w-[90%]">
               <img
+                data-scroll
+                data-scroll-speed=".1"
                 className="increase-size-img h-full w-full object-cover scale-105 "
                 src={AboutImg}
                 alt=""
               />
             </div>
             <button className="circle-btn button absolute z-[1] overflow-hidden bottom-0 left-0 h-[34vw] w-[34vw] bg-darkGray rounded-full md:h-[25vw] md:w-[25vw] lg:w-[10vw] lg:h-[10vw]">
-              <h4 className="btn-text text-white text-[5vw] leading-[5.3vw] font-medium tracking-wide md:text-[4vw] md:leading-[4.3vw] lg:text-[1.5vw] lg:leading-[1.5vw]">
+              <h4 className="btn-text bright-sm text-white text-[5vw] leading-[5.3vw] font-medium tracking-wide md:text-[4vw] md:leading-[4.3vw] lg:text-[1.5vw] lg:leading-[1.5vw]">
                 About <br />
                 Me
               </h4>
