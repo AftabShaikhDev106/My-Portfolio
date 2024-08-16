@@ -108,7 +108,7 @@ function ProjectSec() {
   }, []);
   return (
     <>
-      <div className="section page3 min-h-[100svh] p-[7vw]  bg-charcoal relative lg:min-h-screen lg:py-[4vw] lg:px-[6vw] flex flex-col gap-10">
+      <div className="section page3 h-fit p-[7vw] bg-charcoal relative z-[1] lg:min-h-screen lg:py-[4vw] lg:px-[6vw] flex flex-col gap-10">
         <div className="animated-border h-[1.5px] w-0 bg-line absolute top-0 left-1/2 -translate-x-1/2"></div>
         <h1 className="font-bold font-spaceGrotesk text-[8vw] leading-[10vw] lg:text-[2.5vw] lg:leading-[2.5vw]">
           {"Projects".split("").map((letter, index) => (

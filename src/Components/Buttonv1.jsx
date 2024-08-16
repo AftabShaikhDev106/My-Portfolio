@@ -2,7 +2,7 @@ import React from "react";
 
 function Buttonv1(props) {
   return (
-    <button className="button-v1 flex items-center h-fit w-fit font-spaceGrotesk py-[1vw] px-[1vw] rounded-[5vw] font-semibold bg-white lg:py-[.5vw] lg:px-[.5vw]">
+    <button className="button-v1 flex items-center h-fit w-fit font-spaceGrotesk py-[1vw] px-[1vw] rounded-full font-semibold bg-white lg:py-[.5vw] lg:px-[.5vw]">
       {props.download ? (
         <a
           href="images/hero-image.png"
