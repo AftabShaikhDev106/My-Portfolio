@@ -22,6 +22,7 @@ const Projects = forwardRef((props, ref) => {
               src={props.object.image}
               className="h-full w-full hidden object-cover object-[50%,45%] lg:block"
               alt=""
+              loading="lazy"
             />
             <div
               ref={ref}
@@ -31,6 +32,7 @@ const Projects = forwardRef((props, ref) => {
                 src={props.object.hoverImage}
                 className="h-full w-full object-cover relative"
                 alt=""
+                loading="lazy"
               />
             </div>
           </div>

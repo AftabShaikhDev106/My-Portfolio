@@ -1,12 +1,18 @@
 import gsap from "gsap";
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function Navbar(props) {
   const [click, setClick] = useState(true);
   const [clickable, setClickable] = useState(true);
   const tl = gsap.timeline({ paused: true });
 
-  const links = ["Home", "About", "Projects", "Contact"];
+  const links = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Project", path: "/project" },
+    { name: "Contact", path: "/contact" },
+  ];
 
   useEffect(() => {
     gsap.set(".link-span", {
@@ -264,7 +270,7 @@ function Navbar(props) {
                 className="link py-3 h-fit w-full flex items-center gap-3"
               >
                 <h4 className="text-white font-spaceGrotesk text-[16vw] pl-8 w-full flex items-center leading-none tracking-tight overflow-hidden md:text-[13vw]">
-                  {link.split("").map((li, index) => (
+                  {link.name.split("").map((li, index) => (
                     <span
                       key={index}
                       className="link-span bright-sm translate-y-full py-2"
@@ -320,9 +326,14 @@ function Navbar(props) {
                 key={index}
                 className="link-cover h-full overflow-hidden relative "
               >
-                <span className="link-item bright-sm font-spaceGrotesk uppercase text-white font-bold text-[1.1vw] py-1 relative cursor-pointer hover:text-limeGreen transition-all ease-linear duration-[.3] flex justify-center align-center translate-y-full opacity-0">
-                  {li}
-                </span>
+                <Link
+                  to={li.path}
+                  className="h-full flex items-center justify-center"
+                >
+                  <span className="link-item bright-sm font-spaceGrotesk uppercase text-white font-bold text-[1.1vw] py-1 relative cursor-pointer hover:text-limeGreen transition-all ease-linear duration-[.3] flex justify-center align-center translate-y-full opacity-0">
+                    {li.name}
+                  </span>
+                </Link>
               </li>
             ))}
           </ul>

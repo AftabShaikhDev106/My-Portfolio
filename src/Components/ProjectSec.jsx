@@ -28,37 +28,6 @@ function ProjectSec() {
   useEffect(() => {
     const projectShowcase = document.querySelectorAll(".project-showcase");
 
-    gsap.fromTo(
-      ".animated-word",
-      { color: "#1A1A1A", textShadow: "0px 0px 0px transparent" },
-      {
-        scrollTrigger: {
-          scroller: "body",
-          trigger: ".animated-word",
-          start: "top 80%",
-          end: "bottom 50%",
-          scrub: 2,
-        },
-        stagger: 0.03,
-        color: "white",
-        overwrite: "auto",
-        textShadow: "0px 0px 5px white",
-      }
-    );
-
-    gsap.to(".animated-border", {
-      scrollTrigger: {
-        scroller: "body",
-        trigger: ".animated-border",
-        start: "top 80%",
-        end: "bottom 70%",
-        scrub: 2,
-      },
-      width: "100%",
-      ease: "power2.out",
-      duration: 1,
-    });
-
     if (isLargeScreen) {
       projectShowcase.forEach((show, index) => {
         show.addEventListener("mouseenter", () => {
@@ -66,12 +35,16 @@ function ProjectSec() {
             width: "100%",
             duration: 0.5,
             ease: "power2.out",
+            immediateRender: false,
+            overflow: "auto",
           });
 
           gsap.to(show, {
             outline: "2px solid white",
             duration: 0,
             textShadow: "0px 0px 2px white",
+            immediateRender: false,
+            overflow: "auto",
           });
         });
 
@@ -87,15 +60,54 @@ function ProjectSec() {
             width: "0%",
             duration: 0.5,
             ease: "power2.out",
+            immediateRender: false,
+            overflow: "auto",
           });
           gsap.to(show, {
             outline: "none",
             duration: 0,
             textShadow: "none",
+            immediateRender: false,
+            overflow: "auto",
           });
         });
       });
     }
+
+    gsap.fromTo(
+      ".animated-word",
+      { color: "#1A1A1A", textShadow: "0px 0px 0px transparent" },
+      {
+        scrollTrigger: {
+          scroller: "body",
+          trigger: ".animated-word",
+          start: "top 80%",
+          end: "bottom 50%",
+          scrub: 2,
+          immediateRender: false,
+        },
+        stagger: 0.03,
+        color: "white",
+        overwrite: "auto",
+        textShadow: "0px 0px 5px white",
+        overwrite: "auto",
+      }
+    );
+
+    gsap.to(".animated-border", {
+      scrollTrigger: {
+        scroller: "body",
+        trigger: ".animated-border",
+        start: "top 80%",
+        end: "bottom 70%",
+        scrub: 2,
+        immediateRender: false,
+      },
+      width: "100%",
+      ease: "power2.out",
+      duration: 1,
+      overflow: "auto",
+    });
 
     return () => {
       if (isLargeScreen) {
@@ -112,7 +124,7 @@ function ProjectSec() {
         <div className="animated-border h-[1.5px] w-0 bg-line absolute top-0 left-1/2 -translate-x-1/2"></div>
         <h1 className="font-bold font-spaceGrotesk text-[8vw] leading-[10vw] lg:text-[2.5vw] lg:leading-[2.5vw]">
           {"Projects".split("").map((letter, index) => (
-            <span key={index} className="animated-word">
+            <span key={index} className="animated-word will-change-auto">
               {letter}
             </span>
           ))}

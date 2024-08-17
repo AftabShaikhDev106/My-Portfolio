@@ -1,4 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import useLocoScroll from "./useLocoScroll";
@@ -8,11 +14,18 @@ import HomeCom from "./Components/HomeCom";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { FaArrowUpLong } from "react-icons/fa6";
 import { GoArrowRight } from "react-icons/go";
+import AboutCom from "./Components/AboutCom";
+import ProjectCom from "./Components/ProjectCom";
+import ContactCom from "./Components/ContactCom";
+import LocomotiveScroll from "locomotive-scroll";
+// import "locomotive-scroll/src/locomotive-scroll.css";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 function App() {
   useLocoScroll(true);
+
+  const location = useLocation();
 
   const [complete, setComplete] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
@@ -70,11 +83,13 @@ function App() {
             start: "top -30%",
             end: "bottom -30%",
             scrub: 2,
+            immediateRender: false,
             onUpdate: (self) => {
               if (self.progress > 0.5) {
                 gsap.to(".second-nav-control", {
                   scale: 1,
                   opacity: 1,
+                  immediateRender: false,
                   onComplete: () => {
                     tl.clear();
                     tl.to(
@@ -83,6 +98,7 @@ function App() {
                         top: "-100%",
                         duration: 2, // Smooth transition
                         ease: "power2.out", // Smooth easing function
+                        immediateRender: false,
                       },
                       "a"
                     );
@@ -102,6 +118,7 @@ function App() {
                 gsap.to(".second-nav-control", {
                   scale: 0,
                   opacity: 0,
+                  immediateRender: false,
                   onComplete: () => {
                     tl.clear();
                     tl.to(
@@ -110,6 +127,7 @@ function App() {
                         top: 0,
                         duration: 0, // Smooth transition
                         ease: "power2.out", // Smooth easing function
+                        immediateRender: false,
                       },
                       "a"
                     );
@@ -119,6 +137,7 @@ function App() {
                         bottom: 0,
                         duration: 0, // Smooth transition
                         ease: "power2.out", // Smooth easing function
+                        immediateRender: false,
                       },
                       "a"
                     );
@@ -140,6 +159,43 @@ function App() {
   };
 
   useEffect(() => {
+    const buttons = document.querySelectorAll(".button-v1");
+    buttons.forEach((btn) => {
+      btn.addEventListener("mouseenter", () => {
+        gsap.to(mouseRef.current, {
+          scale: 5,
+          duration: 0.5,
+          mixBlendMode: "difference",
+          immediateRender: false,
+        });
+      });
+
+      btn.addEventListener("mouseleave", () => {
+        gsap.to(mouseRef.current, {
+          scale: 1,
+          duration: 0.5,
+          mixBlendMode: "normal",
+          immediateRender: false,
+        });
+      });
+    });
+
+    const scroll = new LocomotiveScroll({
+      el: document.querySelector("#main"),
+      smooth: true,
+    });
+
+    // Reinitialize Locomotive Scroll when route changes
+    return () => {
+      scroll.destroy();
+      buttons.forEach((btn) => {
+        btn.addEventListener("mouseenter", null);
+        btn.addEventListener("mouseleave", null);
+      });
+    };
+  }, [location.pathname]);
+
+  useEffect(() => {
     let mainElement = document.querySelector("#main");
 
     if (isScrollLocked) {
@@ -148,6 +204,7 @@ function App() {
         right: 0,
         ease: "expo.out",
         duration: 1,
+        immediateRender: false,
         onComplete: () => {
           mainElement.style.position = "fixed";
           mainElement.style.top = `-${scrollPosition.top}px`;
@@ -157,6 +214,7 @@ function App() {
             ".line",
             {
               width: "100%",
+              immediateRender: false,
             },
             "a"
           );
@@ -167,6 +225,7 @@ function App() {
               scale: 1,
               opacity: 1,
               duration: 0.5,
+              immediateRender: false,
             },
             "a"
           );
@@ -175,11 +234,13 @@ function App() {
             y: 0,
             opacity: 1,
             stagger: 0.03,
+            immediateRender: false,
           });
 
           tl.to(".count", {
             opacity: 1,
             duration: 1,
+            immediateRender: false,
             onComplete: () => {
               setClickMenu(true);
             },
@@ -198,17 +259,20 @@ function App() {
       tl.to(".count", {
         opacity: 0,
         duration: 1,
+        immediateRender: false,
       });
 
       tl.to(".big-link-span", {
         y: "100%",
         opacity: 0,
+        immediateRender: false,
       });
 
       tl.to(
         ".line",
         {
           width: 0,
+          immediateRender: false,
         },
         "a"
       );
@@ -219,6 +283,7 @@ function App() {
           scale: 0,
           opacity: 0,
           duration: 0.5,
+          immediateRender: false,
         },
         "a"
       );
@@ -227,6 +292,7 @@ function App() {
         right: "-100%",
         ease: "expo.out",
         duration: 1,
+        immediateRender: false,
         onComplete: () => {
           setClickMenu(true);
         },
@@ -265,11 +331,13 @@ function App() {
         start: "top -30%",
         end: "bottom -30%",
         scrub: 2,
+        immediateRender: false,
         onUpdate: (self) => {
           if (self.progress > 0.5) {
             gsap.to(".second-nav-control", {
               scale: 1,
               opacity: 1,
+              immediateRender: false,
               onComplete: () => {
                 tl.clear();
                 tl.to(
@@ -329,6 +397,7 @@ function App() {
             gsap.to(".second-nav-control", {
               scale: 0,
               opacity: 0,
+              immediateRender: false,
               onComplete: () => {
                 tl.clear();
                 tl.to(
@@ -374,6 +443,7 @@ function App() {
       },
       scale: 1,
       opacity: 1,
+      immediateRender: false,
     });
 
     const handleMouseMove = (e) => {
@@ -392,6 +462,7 @@ function App() {
       gsap.to(mouseRef.current, {
         opacity: 0,
         ease: "expo.out",
+        immediateRender: false,
       });
     };
 
@@ -400,6 +471,7 @@ function App() {
         y: `${mouseDets.current.y - 6 + window.scrollY}px`,
         ease: "expo.out",
         overwrite: "auto",
+        immediateRender: false,
       });
     };
 
@@ -430,6 +502,7 @@ function App() {
         gsap.to(mouseRef.current, {
           scale: 10,
           duration: 0.5,
+          immediateRender: false,
         });
 
         gsap.to(item, {
@@ -437,18 +510,21 @@ function App() {
           y: gsap.utils.interpolate(-20, 20, rangeY),
           fontWeight: 700,
           overwrite: "auto",
+          immediateRender: false,
         });
       });
 
       item.addEventListener("mouseenter", () => {
         gsap.to(".link-cover", {
           zIndex: 50,
+          immediateRender: false,
         });
 
         gsap.to(mouseRef.current, {
           scale: 10,
           duration: 0.5,
           overwrite: "auto",
+          immediateRender: false,
         });
       });
 
@@ -457,10 +533,12 @@ function App() {
           scale: 1,
           duration: 0.5,
           overwrite: "auto",
+          immediateRender: false,
         });
 
         gsap.to(".link-cover", {
           zIndex: 1,
+          immediateRender: false,
         });
 
         gsap.to(item, {
@@ -469,6 +547,7 @@ function App() {
           ease: "elastic.out",
           duration: 1.5,
           overwrite: "auto",
+          immediateRender: false,
         });
       });
     });
@@ -488,31 +567,13 @@ function App() {
   }, [complete]);
 
   useEffect(() => {
-    const buttons = document.querySelectorAll(".button-v1");
-    buttons.forEach((btn) => {
-      btn.addEventListener("mouseenter", () => {
-        gsap.to(mouseRef.current, {
-          scale: 5,
-          duration: 0.5,
-          mixBlendMode: "difference",
-        });
-      });
-
-      btn.addEventListener("mouseleave", () => {
-        gsap.to(mouseRef.current, {
-          scale: 1,
-          duration: 0.5,
-          mixBlendMode: "normal",
-        });
-      });
-    });
-
     let circleBtn = document.querySelector(".second-nav-control");
     let btnText = document.querySelector(".eye-cover");
 
     const handleMouseLeave = () => {
       gsap.to(circleBtn, {
         scale: 1,
+        immediateRender: false,
       });
 
       gsap.to(btnText, {
@@ -520,6 +581,7 @@ function App() {
         y: 0,
         ease: "elastic.out",
         duration: 1.5,
+        immediateRender: false,
       });
 
       gsap.to(circleBtn, {
@@ -527,12 +589,14 @@ function App() {
         y: 0,
         ease: "elastic.out",
         duration: 1.5,
+        immediateRender: false,
       });
     };
 
     const handleMouseMove = (e) => {
       gsap.to(circleBtn, {
         scale: 1.2,
+        immediateRender: false,
       });
 
       const dims = circleBtn.getBoundingClientRect();
@@ -555,11 +619,13 @@ function App() {
       gsap.to(btnText, {
         x: lerp(-10, 10, rangeX),
         y: lerp(-10, 10, rangeY),
+        immediateRender: false,
       });
 
       gsap.to(circleBtn, {
         x: lerp(-20, 20, rangeX),
         y: lerp(-20, 20, rangeY),
+        immediateRender: false,
       });
     };
 
@@ -576,14 +642,18 @@ function App() {
             backgroundColor: "#A3E635",
             duration: 0.5,
             ease: "power2.out",
+            immediateRender: false,
             onStart: () => {
               gsap.set(".mouse-text", {
                 scale: 0.13,
+
+                immediateRender: false,
               });
 
               gsap.to(".mouse-text", {
                 opacity: 1,
                 duration: 0.3,
+                immediateRender: false,
               });
             },
           });
@@ -596,10 +666,12 @@ function App() {
           backgroundColor: "white",
           duration: 0.5,
           ease: "power2.out",
+          immediateRender: false,
           onStart: () => {
             gsap.to(".mouse-text", {
               opacity: 0,
               duration: 0,
+              immediateRender: false,
             });
           },
         });
@@ -627,14 +699,14 @@ function App() {
     <>
       <div
         ref={mouseRef}
-        className="mouse h-3 w-3 scale-1 opacity-0 hidden bg-white z-[3] absolute rounded-full lg:flex justify-center items-center select-none pointer-events-none"
+        className="mouse h-3 w-3 scale-1 opacity-0 hidden bg-white z-[3] absolute rounded-full lg:flex justify-center items-center select-none pointer-events-none origin-center transform translate-z-0 transition-transform duration-300 ease-out backface-hidden"
       >
         <div className="mouse-text bright-sm font-spaceGrotesk text-white origin-center font-semibold text-[1.2vw] opacity-0 leading-none ">
           Visit
         </div>
       </div>
 
-      <div className="big-nav z-60 h-screen w-full fixed top-0 hidden lg:flex justify-center items-center bg-charcoal z-50 p-20">
+      <div className="big-nav z-60 h-screen w-full fixed top-0 hidden lg:flex justify-center items-center bg-charcoal z-50 p-20 will-change-[transform,opacity]">
         <div className="count absolute p-5 flex gap-2 opacity-0">
           <span className="static-zero text-[50vw] font-spaceGrotesk text-line leading-none font-extrabold">
             0
@@ -674,7 +746,7 @@ function App() {
 
       <div
         onClick={toggleBigNav}
-        className="second-nav-control bg-charcoal fixed top-[4.3vw] hidden right-[4.6vw] cursor-pointer items-center justify-center z-[51] box-content h-[8vw] aspect-square overflow-hidden rounded-full py-4 px-4 shadow-[0_0_30px_8px_rgba(0,0,0,0.5)] md:h-[6vw] lg:top-[3vw] lg:right-[3vw] lg:flex lg:box-content lg:h-[3vw] active:bg-charcoal"
+        className="second-nav-control bg-charcoal fixed top-[4.3vw] hidden right-[4.6vw] cursor-pointer items-center justify-center z-[51] box-content h-[8vw] aspect-square overflow-hidden rounded-full py-4 px-4 will-change-[transform,opacity] shadow-[0_0_30px_8px_rgba(0,0,0,0.5)] md:h-[6vw] lg:top-[3vw] lg:right-[3vw] lg:flex lg:box-content lg:h-[3vw] active:bg-charcoal"
       >
         <div className="top-lid absolute h-1/2 w-full bg-charcoal z-10"></div>
         <div className="eye-ball overflow-hidden bg-white h-full w-full aspect-square bright-lg rounded-full flex justify-center items-center">
@@ -697,13 +769,18 @@ function App() {
           complete ? "h-fit" : "h-[100svh]"
         } w-full relative bg-darkGray overflow-hidden ${
           complete ? "lg:h-fit" : "lg:h-[100vh]"
-        }`}
+        } `}
         data-scroll
         data-scroll-section
       >
         <Loader complete={handleAnimationCompleteLoader} />
         <Navbar complete={complete} />
-        <HomeCom complete={complete} />
+        <Routes>
+          <Route path="/" element={<HomeCom complete={complete} />}></Route>
+          <Route path="/about" element={<AboutCom />}></Route>
+          <Route path="/project" element={<ProjectCom />}></Route>
+          <Route path="/contact" element={<ContactCom />}></Route>
+        </Routes>
       </div>
     </>
   );

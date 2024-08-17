@@ -103,9 +103,9 @@ function AboutSec() {
   return (
     <>
       <div
-        className="section data-scroll data-scroll-section page2 p-[7vw] h-fit w-full relative overflow-hidden flex flex-col gap-10 md:gap-20 lg:py-[4vw] lg:px-[6vw] lg:gap-14 bg-charcoal rounded-t-lg"
-        // data-scroll
-        // data-scroll-speed=""
+        className="section page2 p-[7vw] h-fit w-full relative overflow-hidden flex flex-col gap-10 md:gap-20 lg:py-[4vw] lg:px-[6vw] lg:gap-14 bg-charcoal rounded-t-lg"
+        data-scroll
+        data-scroll-section
       >
         <div className="left-info pt-[8vw] w-full lg:pt-[2vw] lg:w-[60%]">
           <h4 className="flex flex-wrap text-center">
@@ -128,13 +128,14 @@ function AboutSec() {
             <div className="image w-[85%] h-[85%] rounded-md overflow-hidden border-none lg:w-[90%]">
               <img
                 data-scroll
-                data-scroll-speed=".1"
-                className="increase-size-img h-full w-full object-cover scale-105 "
+                // data-scroll-section
+                data-scroll-speed=".09"
+                className="increase-size-img h-full w-full object-cover scale-105 will-change-[transform,opacity]"
                 src={AboutImg}
                 alt=""
               />
             </div>
-            <button className="circle-btn button absolute z-[1] overflow-hidden bottom-0 left-0 h-[34vw] w-[34vw] bg-darkGray rounded-full md:h-[25vw] md:w-[25vw] lg:w-[10vw] lg:h-[10vw]">
+            <button className="circle-btn button absolute z-[1] overflow-hidden bottom-0 left-0 h-[34vw] w-[34vw] bg-darkGray rounded-full md:h-[25vw] md:w-[25vw] lg:w-[10vw] lg:h-[10vw] will-change-transform">
               <h4 className="btn-text bright-sm text-white text-[5vw] leading-[5.3vw] font-medium tracking-wide md:text-[4vw] md:leading-[4.3vw] lg:text-[1.5vw] lg:leading-[1.5vw]">
                 About <br />
                 Me

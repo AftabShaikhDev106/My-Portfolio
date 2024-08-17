@@ -17,16 +17,16 @@ const useLocoScroll = (start) => {
       smooth: true,
       mobile: {
         breakpoint: 0,
-        smooth: false,
+        smooth: true,
         getDirection: true,
       },
       tablet: {
         breakpoint: 0,
-        smooth: false,
+        smooth: true,
         getDirection: true,
       },
 
-      multiplier: 1,
+      multiplier: 1.5,
       class: "is-reveal",
     });
   }, [start]);
