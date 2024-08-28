@@ -10,7 +10,7 @@ function Navbar(props) {
   const links = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
-    { name: "Project", path: "/project" },
+    { name: "Project", path: "/projects" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -28,6 +28,14 @@ function Navbar(props) {
     gsap.set(".personal-info-image", {
       scale: "0",
       opacity: 0,
+    });
+
+    let links = document.querySelectorAll(".link");
+
+    links.forEach((link, index) => {
+      link.addEventListener("click", () => {
+        navUp();
+      });
     });
   }, []);
 
@@ -265,21 +273,20 @@ function Navbar(props) {
         <div className="nav-info-cover h-screen flex flex-col gap-[5vw] justify-end">
           <div className="nav-links w-full h-fit flex flex-col items-center justify-start">
             {links.map((link, index) => (
-              <div
-                key={index}
-                className="link py-3 h-fit w-full flex items-center gap-3"
-              >
-                <h4 className="text-white font-spaceGrotesk text-[16vw] pl-8 w-full flex items-center leading-none tracking-tight overflow-hidden md:text-[13vw]">
-                  {link.name.split("").map((li, index) => (
-                    <span
-                      key={index}
-                      className="link-span bright-sm translate-y-full py-2"
-                    >
-                      {li}
-                    </span>
-                  ))}
-                </h4>
-              </div>
+              <Link key={index} to={link.path} className=" w-full ">
+                <div className="link py-3 h-fit w-full flex items-center gap-3">
+                  <h4 className="text-white font-spaceGrotesk text-[15vw] pl-8 w-full flex items-center leading-none tracking-tight overflow-hidden md:text-[13vw]">
+                    {link.name.split("").map((li, index) => (
+                      <span
+                        key={index}
+                        className="link-span bright-sm translate-y-full py-2"
+                      >
+                        {li}
+                      </span>
+                    ))}
+                  </h4>
+                </div>
+              </Link>
             ))}
           </div>
           <div className="w-full h-fit flex items-center  p-[10vw] border-t-2 border-gray">
@@ -302,7 +309,7 @@ function Navbar(props) {
         </div>
       </div>
       <nav
-        className=" py-[7vw] w-full px-[8vw] flex items-center justify-between md:py-[2vw] md:px-[4vw] lg:py-[1vw] lg:px-[6vw] lg:z-[3]"
+        className=" py-[7vw] w-full px-[8vw] relative z-[2] flex items-center justify-between md:py-[2vw] md:px-[4vw] lg:py-[1vw] lg:px-[6vw] lg:z-[3]"
         data-scroll
         data-scroll-section
       >
@@ -324,7 +331,7 @@ function Navbar(props) {
             {links.map((li, index) => (
               <li
                 key={index}
-                className="link-cover h-full overflow-hidden relative "
+                className="link-cover h-full overflow-hidden relative"
               >
                 <Link
                   to={li.path}

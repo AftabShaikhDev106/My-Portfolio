@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import HeroPage from "./HeroPage";
 import AboutSec from "./AboutSec";
 import ProjectSec from "./ProjectSec.jsx";
-import ContactSec from "./ContactSec.jsx";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Transition from "../Transition.jsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,10 +13,9 @@ function HomeCom(props) {
     <>
       <HeroPage complete={props.complete} />
       <AboutSec />
-      <ProjectSec />
-      <ContactSec />
+      <ProjectSec project={props.project} />
     </>
   );
 }
 
-export default HomeCom;
+export default Transition(HomeCom);

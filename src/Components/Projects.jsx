@@ -6,7 +6,7 @@ const Projects = forwardRef((props, ref) => {
       <a
         href={props.object.link}
         target="_blank"
-        className={`${
+        className={`project-show-link ${
           props.index === props.fullObj.length - 1 && props.isOdd
             ? "w-full lg:w-1/2 "
             : "w-full lg:full "
@@ -17,24 +17,13 @@ const Projects = forwardRef((props, ref) => {
         }`}
       >
         <div className={`project-showcase`}>
-          <div className="image-con h-[30vh] w-full relative lg:h-[65vh]">
+          <div className="image-con h-[30vh] w-full relative lg:h-[65vh] bg-blue-300">
             <img
               src={props.object.image}
               className="h-full w-full hidden object-cover object-[50%,45%] lg:block"
               alt=""
               loading="lazy"
             />
-            <div
-              ref={ref}
-              className="hover-image absolute top-0 right-0  w-full h-full lg:w-0"
-            >
-              <img
-                src={props.object.hoverImage}
-                className="h-full w-full object-cover relative"
-                alt=""
-                loading="lazy"
-              />
-            </div>
           </div>
           <div className="text-content flex justify-between py-5 px-3">
             <h4 className=" font-spaceGrotesk font-semibold text-white text-[3.5vw] lg:text-[1.3vw]">

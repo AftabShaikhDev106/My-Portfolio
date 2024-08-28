@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Buttonv1 from "./Buttonv1";
 import { MdDownload } from "react-icons/md";
 import gsap from "gsap";
-import heroImage from "../images/hero-image.png";
+import heroImage from "../images/hero-image.webp";
 
 function HeroPage({ complete }) {
   const [random, setRandom] = useState(0);
@@ -49,9 +49,10 @@ function HeroPage({ complete }) {
   }, [complete]);
 
   return (
-    <div
-      className="section page1 h-[100svh] relative flex flex-col justify-between px-[6vw] w-full md:justify-center"
+    <div      
+      className="section page1 h-[100svh] relative z-[1] bg-darkGray flex flex-col justify-between px-[6vw] w-full md:justify-center will-change-transform"
       data-scroll
+      data-scroll-section
       data-scroll-speed="-.6"
     >
       <div className="top-content h-[35svh] w-full flex flex-col justify-center gap-5 lg:h-[60vh] lg:z-[2] lg:justify-between">

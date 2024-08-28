@@ -1,7 +1,19 @@
 import React from "react";
+import AboutHero from "./AboutHero";
+import AboutMain from "./AboutMain";
+import AboutSkill from "./AboutSkill";
+import AboutTimeline from "./AboutTimeline";
+import Transition from "../Transition.jsx";
 
-function AboutCom() {
-  return <div className="section about-page1"></div>;
+function AboutCom(props) {
+  return (
+    <>
+      <AboutHero complete={props.complete} />
+      <AboutMain />
+      <AboutTimeline />
+      <AboutSkill />
+    </>
+  );
 }
 
-export default AboutCom;
+export default Transition(AboutCom);
