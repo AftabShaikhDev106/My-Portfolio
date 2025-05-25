@@ -28,7 +28,7 @@ function ContactSec(props) {
             <div className="image-text-con flex items-end gap-3">
               <div className="contact-image h-28 w-28 overflow-hidden rounded-xl lg:h-40 lg:w-40 flex justify-center items-center bg-slate-950">
                 {/* <img loading="lazy" src={contactImage} className="height" alt="" /> */}
-                <MdOutlineEmail className="text-9xl text-white" />
+                <MdOutlineEmail className="text-8xl lg:text-9xl text-white" />
               </div>
               <h4 className="contact-text lets-text text-white font-spaceGrotesk text-[13vw] font-bold leading-[13vw] lg:text-[5vw] lg:leading-[5vw]">
                 Let<span className="text-limeG  reen">&apos;</span>s
@@ -57,7 +57,7 @@ function ContactSec(props) {
               </h4>
               <div className="contact-bottom hidden h-24 w-24 overflow-hidden bg-slate-950 rounded-xl lg:h-40 justify-center items-center lg:w-40 lg:flex">
                 {/* <img loading="lazy" src={contactImage} alt="" /> */}
-                <MdOutlinePhoneEnabled className="text-9xl text-white" />
+                <MdOutlinePhoneEnabled className="text-7xl lg:text-9xl text-white" />
               </div>
             </div>
             <div className="contact-bottom-bottom-text-con w-full flex justify-end gap-5 relative">

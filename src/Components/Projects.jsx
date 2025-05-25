@@ -20,8 +20,8 @@ const Projects = forwardRef((props, ref) => {
           <div className="image-con h-[30vh] w-full relative lg:h-[65vh] bg-blue-300">
             <img
               src={props.object.image}
-              className="h-full w-full hidden object-cover object-[50%,45%] lg:block"
-              alt=""
+              className="h-full w-full object-cover object-[50%,45%]"
+              alt="Poster"
               loading="lazy"
             />
           </div>
