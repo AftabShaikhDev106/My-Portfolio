@@ -4,6 +4,9 @@ import Buttonv1 from "./Buttonv1";
 import { GoArrowUpRight } from "react-icons/go";
 import contactImage from "../images/model-contact.webp";
 import LocomotiveScroll from "locomotive-scroll";
+import { MdOutlineEmail } from "react-icons/md";
+import { MdOutlinePhoneEnabled } from "react-icons/md";
+
 import BottomFooter from "./BottomFooter";
 import { Link } from "react-router-dom";
 
@@ -23,11 +26,12 @@ function ContactSec(props) {
         <div className="center w-full h-[75%] relative p-[5vw] lg:h-[90%] lg:w-1/2 lg:p-5 ">
           <div className="top-contact h-1/2 flex flex-col gap-2 overflow-hidden lg:gap-3">
             <div className="image-text-con flex items-end gap-3">
-              <div className="contact-image h-28 w-28 overflow-hidden rounded-xl lg:h-40 lg:w-40 bg-slate-950">
+              <div className="contact-image h-28 w-28 overflow-hidden rounded-xl lg:h-40 lg:w-40 flex justify-center items-center bg-slate-950">
                 {/* <img loading="lazy" src={contactImage} className="height" alt="" /> */}
+                <MdOutlineEmail className="text-9xl text-white" />
               </div>
               <h4 className="contact-text lets-text text-white font-spaceGrotesk text-[13vw] font-bold leading-[13vw] lg:text-[5vw] lg:leading-[5vw]">
-                Let<span className="text-limeG  reen">'</span>s
+                Let<span className="text-limeG  reen">&apos;</span>s
               </h4>
             </div>
             <div className="second-line relative h-fit w-full overflow-hidden">
@@ -51,8 +55,9 @@ function ContactSec(props) {
               <h4 className="text-white font-spaceGrotesk text-[13vw] leading-[13vw] whitespace-nowrap font-bold lg:text-[5vw] lg:leading-[5vw]">
                 And Work
               </h4>
-              <div className="contact-bottom hidden h-24 w-24 overflow-hidden bg-slate-950 rounded-xl lg:h-40 lg:w-40 lg:block">
+              <div className="contact-bottom hidden h-24 w-24 overflow-hidden bg-slate-950 rounded-xl lg:h-40 justify-center items-center lg:w-40 lg:flex">
                 {/* <img loading="lazy" src={contactImage} alt="" /> */}
+                <MdOutlinePhoneEnabled className="text-9xl text-white" />
               </div>
             </div>
             <div className="contact-bottom-bottom-text-con w-full flex justify-end gap-5 relative">

@@ -1,5 +1,4 @@
 import React from "react";
-import { GoArrowRight } from "react-icons/go";
 import { AiOutlineMobile } from "react-icons/ai";
 
 import { RiDeviceLine } from "react-icons/ri";
@@ -25,7 +24,7 @@ function AboutSkill() {
         trigger: ".about-skill-page",
         start: "top 60%",
         end: "bottom 55%",
-        markers: true,
+
         scrub: 2,
       },
       width: 0,
@@ -36,7 +35,6 @@ function AboutSkill() {
         trigger: ".about-skill-page",
         start: "top 60%",
         end: "50% 55%",
-        markers: true,
         scrub: 2,
       },
       scale: 0,
