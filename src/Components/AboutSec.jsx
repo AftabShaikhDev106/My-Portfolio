@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
-import AboutImg from "../images/model-about.jpg";
+import AboutImg from "../images/model-about.webp";
 import gsap from "gsap";
+import { Link } from "react-router-dom";
+// import loca
 
 function AboutSec() {
   const lerp = (x, y, a) => x * (1 - a) + y * a;
@@ -33,12 +35,6 @@ function AboutSec() {
       });
     }
 
-    function handleMouseEnter() {
-      gsap.to(".increase-size-img", {
-        scale: 1.2,
-      });
-    }
-
     function handleMouseMove(e) {
       const dims = circleBtn.getBoundingClientRect();
       const rangeX = gsap.utils.mapRange(
@@ -67,15 +63,13 @@ function AboutSec() {
       });
     }
 
-    circleBtn.addEventListener("mouseenter", handleMouseEnter);
-
     circleBtn.addEventListener("mouseleave", handleMouseLeave);
 
     circleBtn.addEventListener("mousemove", handleMouseMove);
 
     gsap.fromTo(
       ".animated-letters",
-      { color: "#1A1A1A" }, // Starting state (color gray)
+      { color: "#1A1A1A", textShadow: "0px 0px 0px transparent" }, // Starting state (color gray)
       {
         color: "white", // Ending state (color white)
         scrollTrigger: {
@@ -87,24 +81,27 @@ function AboutSec() {
         },
         stagger: 0.03,
         overwrite: "auto",
+        textShadow: "0px 0px 5px white",
       }
     );
 
     return () => {
-      circleBtn.removeEventListener("mouseenter", handleMouseEnter);
-
       circleBtn.removeEventListener("mouseleave", handleMouseLeave);
 
       circleBtn.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
+  // useEffect(() => {
+
+  //   return () => {};
+  // }, [location.pathname]);
   return (
     <>
       <div
-        className="section page2 p-[7vw] h-fit w-full relative overflow-hidden flex flex-col gap-10 md:gap-20 lg:p-[4vw] lg:gap-14 bg-charcoal rounded-t-lg"
-        // data-scroll
-        // data-scroll-speed=""
+        className="section page2 p-[7vw] h-fit w-full relative z-[1] overflow-hidden flex flex-col gap-10 md:gap-20 lg:py-[4vw] lg:px-[6vw] lg:gap-14 bg-charcoal rounded-t-lg"
+        data-scroll
+        data-scroll-section
       >
         <div className="left-info pt-[8vw] w-full lg:pt-[2vw] lg:w-[60%]">
           <h4 className="flex flex-wrap text-center">
@@ -126,17 +123,22 @@ function AboutSec() {
           <div className="image-pos  relative flex flex-col justify-between items-end w-full lg:w-1/2">
             <div className="image w-[85%] h-[85%] rounded-md overflow-hidden border-none lg:w-[90%]">
               <img
-                className="increase-size-img h-full w-full object-cover scale-105 "
+                data-scroll
+                data-scroll-section
+                data-scroll-speed=".09"
+                className="increase-size-img h-[150%] w-full object-cover scale-105 will-change-[transform,opacity]"
                 src={AboutImg}
                 alt=""
               />
             </div>
-            <button className="circle-btn button absolute z-[1] overflow-hidden bottom-0 left-0 h-[34vw] w-[34vw] bg-darkGray rounded-full md:h-[25vw] md:w-[25vw] lg:w-[10vw] lg:h-[10vw]">
-              <h4 className="btn-text text-white text-[5vw] leading-[5.3vw] font-medium tracking-wide md:text-[4vw] md:leading-[4.3vw] lg:text-[1.5vw] lg:leading-[1.5vw]">
-                About <br />
-                Me
-              </h4>
-            </button>
+            <Link to={"/about"}>
+              <button className="circle-btn button absolute z-[1] overflow-hidden bottom-0 left-0 h-[34vw] w-[34vw] bg-darkGray rounded-full md:h-[25vw] md:w-[25vw] lg:w-[10vw] lg:h-[10vw] will-change-transform">
+                <h4 className="btn-text bright-sm text-white text-[5vw] leading-[5.3vw] font-medium tracking-wide md:text-[4vw] md:leading-[4.3vw] lg:text-[1.5vw] lg:leading-[1.5vw]">
+                  About <br />
+                  Me
+                </h4>
+              </button>
+            </Link>
           </div>
         </div>
       </div>
