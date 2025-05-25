@@ -313,7 +313,7 @@ function Navbar(props) {
         data-scroll
         data-scroll-section
       >
-        <div className="logo flex flex-col">
+        <Link to={"/"} className="logo flex flex-col">
           <span className="overflow-hidden">
             <h4 className="logo-text translate-y-full bright-sm text-white uppercase select-none font-spaceGrotesk text-[5.3vw] leading-[6vw] tracking-wider font-medium md:text-[4vw] md:leading-tight lg:text-[1.5vw] lg:leading-tight cursor-pointer">
               Aftab{" "}
@@ -324,7 +324,7 @@ function Navbar(props) {
               Shaikh{" "}
             </h4>
           </span>
-        </div>
+        </Link>
 
         <div className="links hidden h-full items-center lg:flex">
           <ul className="flex gap-[4.5vw] items-center">

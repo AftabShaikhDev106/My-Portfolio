@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import BottomFooter from "./BottomFooter";
-// import contactImage from "../images/model-contact-big.jpg";
+import contactImage from "../images/contact-page.jpeg";
 import Transition from "../Transition.jsx";
 import gsap from "gsap";
 
@@ -63,13 +63,13 @@ function ContactCom(props) {
         <div className="main-contact-con h-[80%] lg:h-[90%] gap-5 lg:gap-0 flex flex-col lg:flex-row p-[6vw] ">
           <div className="left-contact-content h-[45%] lg:h-full lg:w-1/2 relative flex justify-end lg:justify-start items-end ">
             <div className="image-padding-container pr-[6vw] h-[88%] w-[100%] absolute top-0 left-0 z-[3]">
-              <div className="image-top contact-image-anim h-full w-full relative bg-lime-300">
-                {/* <img
+              <div className="image-top contact-image-anim h-full w-full relative">
+                <img
                   src={contactImage}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover rounded"
                   alt=""
                   loading="lazy"
-                /> */}
+                />
               </div>
             </div>
             <div className="text-container pr-9 lg:pl-9">

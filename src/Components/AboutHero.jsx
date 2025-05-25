@@ -2,7 +2,7 @@ import gsap from "gsap";
 import React from "react";
 import { useEffect } from "react";
 
-// import aboutImage from "../images/model-contact.webp";
+import aboutImage from "../images/about-page.jpeg";
 
 function AboutHero(props) {
   useEffect(() => {
@@ -87,8 +87,13 @@ function AboutHero(props) {
           </h1>
         </div>
 
-        <div className="image absolute bottom-0 right-0 z-[2] w-[90%] h-[80%] bg-red-500 aspect-square rounded-lg overflow-hidden lg:w-[50%] ">
-          {/* <img loading="lazy" src={aboutImage} alt="" /> */}
+        <div className="image absolute bottom-0 right-0 z-[2] w-[90%] h-[80%] aspect-square rounded-lg overflow-hidden lg:w-[50%] ">
+          <img
+            loading="lazy"
+            className="h-full w-full object-cover"
+            src={aboutImage}
+            alt=""
+          />
         </div>
       </div>
     </>

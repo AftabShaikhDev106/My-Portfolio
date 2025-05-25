@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import AboutImg from "../images/model-about.webp";
+import AboutImg from "../images/about-page.jpeg";
 import gsap from "gsap";
 import { Link } from "react-router-dom";
 // import loca
@@ -126,7 +126,7 @@ function AboutSec() {
                 data-scroll
                 data-scroll-section
                 data-scroll-speed=".09"
-                className="increase-size-img h-[150%] w-full object-cover scale-105 will-change-[transform,opacity]"
+                className="increase-size-img h-[120%] w-full object-cover will-change-[transform,opacity]"
                 src={AboutImg}
                 alt=""
               />
