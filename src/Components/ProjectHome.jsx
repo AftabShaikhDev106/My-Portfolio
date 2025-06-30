@@ -7,6 +7,7 @@ import { FaUserTie } from "react-icons/fa";
 import { AiOutlineFolderOpen } from "react-icons/ai";
 import { FaClone } from "react-icons/fa";
 import { stagger } from "framer-motion";
+import { GiOfficeChair } from "react-icons/gi";
 
 function ProjectHome(props) {
   const hover = useRef(null);
@@ -18,10 +19,14 @@ function ProjectHome(props) {
   const client = props.project.filter((item) => item.type === "Client").length;
   const MyProject = props.project.filter((item) => item.type === "My").length;
   const Clone = props.project.filter((item) => item.type === "Clone").length;
+  const Company = props.project.filter(
+    (item) => item.type === "Company"
+  ).length;
 
   const icon = [
     <AiOutlineAppstore />,
     <FaUserTie />,
+    <GiOfficeChair />,
     <AiOutlineAppstore />,
     <FaClone />,
   ];
@@ -32,7 +37,7 @@ function ProjectHome(props) {
     let allTypes = document.querySelectorAll(".types");
     allTypes.forEach((type, idx) => {
       type.addEventListener("click", () => {
-        hover.current.style.left = `${idx * 25}%`;
+        hover.current.style.left = `${idx * 20}%`;
         setIndex(idx);
       });
     });
@@ -208,24 +213,27 @@ function ProjectHome(props) {
           <ul className="h-full w-full lg:w-[70%]  flex relative bottom-0">
             <div
               ref={hover}
-              className="hover-select absolute h-1 w-[25%] left-0 bottom-0 bg-limeGreen rounded-full transition-all duration-300 ease-in-out"
+              className="hover-select absolute h-1 w-[20%] left-0 bottom-0 bg-limeGreen rounded-full transition-all duration-300 ease-in-out"
             ></div>
-            {["All", "Client", "My Project", "Clones"].map((type, i) => (
-              <li
-                key={i}
-                className="types w-[25%] h-full cursor-pointer text-sm text-center flex justify-center items-end lg:items-center font-spaceGrotesk text-white lg:text-xl"
-              >
-                <h4 className="flex relative mb-2">
-                  {window.innerWidth <= isMobile ? icon[i] : type}
-                  <sup className=" absolute -top-3  -right-3  ml-1 w4 h-4 lg:w-6 text-line font-semibold text-xs lg:h-6 flex justify-center items-center aspect-square rounded-full">
-                    {type === "All" && fullLength}
-                    {type === "Client" && client}
-                    {type === "My Project" && MyProject}
-                    {type === "Clones" && Clone}
-                  </sup>
-                </h4>
-              </li>
-            ))}
+            {["All", "Client", "Company's Project", "My Project", "Clones"].map(
+              (type, i) => (
+                <li
+                  key={i}
+                  className="types w-[25%] h-full cursor-pointer text-sm text-center flex justify-center items-end lg:items-center font-spaceGrotesk text-white lg:text-xl"
+                >
+                  <h4 className="flex relative mb-2">
+                    {window.innerWidth <= isMobile ? icon[i] : type}
+                    <sup className=" absolute -top-3  -right-3  ml-1 w4 h-4 lg:w-6 text-line font-semibold text-xs lg:h-6 flex justify-center items-center aspect-square rounded-full">
+                      {type === "All" && fullLength}
+                      {type === "Client" && client}
+                      {type === "Company's Project" && Company}
+                      {type === "My project" && MyProject}
+                      {type === "Clones" && Clone}
+                    </sup>
+                  </h4>
+                </li>
+              )
+            )}
           </ul>
         </div>
         <div
@@ -255,7 +263,19 @@ function ProjectHome(props) {
                   isOdd={isOdd}
                 />
               ))
-          ) : index === 2 && MyProject > 0 ? (
+          ) : index === 2 && Company > 0 ? (
+            props.project
+              .filter((item) => item.type === "Company")
+              .map((pro, i) => (
+                <Projects
+                  key={i}
+                  object={pro}
+                  index={i}
+                  fullObj={props.project}
+                  isOdd={isOdd}
+                />
+              ))
+          ) : index === 3 && MyProject > 0 ? (
             props.project
               .filter((item) => item.type === "My")
               .map((pro, i) => (
@@ -267,7 +287,7 @@ function ProjectHome(props) {
                   isOdd={isOdd}
                 />
               ))
-          ) : index === 3 && Clone > 0 ? (
+          ) : index === 4 && Clone > 0 ? (
             props.project
               .filter((item) => item.type === "Clone")
               .map((pro, i) => (

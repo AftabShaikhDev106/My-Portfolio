@@ -76,7 +76,7 @@ function HeroPage({ complete }) {
       <div className="bottom-content h-[65svh] w-full relative flex items-end lg:absolute lg:top-0 lg:h-full lg:left-0 lg:z-[1]">
         <div className="image hero-image relative w-full bottom-0 z-[2] flex justify-center items-end">
           <img
-            className="w-full h-full object-cover object-top lg:w-[50%]"
+            className="w-full lg:h-full object-cover object-top lg:w-[50%]"
             src={heroImage}
             alt="Hero"
           />

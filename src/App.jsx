@@ -22,6 +22,7 @@ import LocomotiveScroll from "locomotive-scroll";
 import ContactSec from "./Components/ContactSec";
 import { AnimatePresence } from "framer-motion";
 import projectImage1 from "./images/project-1-hover.webp";
+import projectImage2 from "./images/Ary_web.png";
 import ScrollToTop from "./ScrollToTop";
 import HideFooter from "./Components/HideFooter";
 import Buttonv1 from "./Components/Buttonv1";
@@ -53,6 +54,12 @@ function App() {
       type: "Client",
       image: projectImage1,
       link: "https://www.youscotrading.com/",
+    },
+    {
+      company: "Aryventory Website (Arysoft)",
+      type: "Company",
+      image: projectImage2,
+      link: "https://aryventory.com/",
     },
   ];
 

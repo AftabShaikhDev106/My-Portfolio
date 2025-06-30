@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 function AboutTimeline() {
   const [width, setWidth] = useState(0);
+  const timelineRef = useRef(null);
+  const innerRef = useRef(null);
 
   const procceses = [
     {
@@ -30,9 +35,15 @@ function AboutTimeline() {
     },
     {
       year: "2024 - Till now",
+      processName: "Joined Arysoft Services Global Pvt. Ltd.",
+      From: "Frontend Developer",
+      flow: "up",
+    },
+    {
+      year: "2024 - Till now",
       processName: "Started 3rd Year",
       From: "Tilak Maharashtra Vidhyapeeth",
-      flow: "up",
+      flow: "down",
     },
   ];
 
@@ -68,44 +79,80 @@ function AboutTimeline() {
     };
   }, []);
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const sections = innerRef.current;
+      console.log(sections.scrollWidth);
+      const totalWidth = sections.scrollWidth - window.innerWidth;
+
+      gsap.to(sections, {
+        x: () => `-${totalWidth + window.innerWidth * 0.12}px`,
+        ease: "none",
+        scrollTrigger: {
+          trigger: timelineRef.current,
+          start: "top top",
+          end: () =>
+            `${
+              innerRef.current.scrollWidth -
+              timelineRef.current.offsetWidth +
+              window.innerWidth * 0.12
+            }px`,
+
+          scrub: true,
+          pin: true,
+          anticipatePin: 1,
+        },
+      });
+    }, timelineRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <>
-      <div data-scroll
+      <div
+        data-scroll
         data-scroll-section
-        className={`section about-timeline h-fit lg:h-screen w-full gap-5 lg:gap-0 ${
+        ref={timelineRef}
+        className={`section about-timeline no-scroll-bar h-fit lg:h-screen w-full gap-5 lg:gap-0 ${
           procceses.length > 5 ? "lg:overflow-x-scroll" : "lg:overflow-hidden"
         }  p-[6vw] bg-darkGray relative z-[2] flex flex-col lg:flex-row border-b-2 border-line`}
       >
         <div
-          className={`time-line-con absolute min-h-full lg:min-w-full hidden justify-center py-[6vw] lg:justify-start lg:items-center top-0 left-1/2 -translate-x-1/2 lg:flex lg:min-h-fit lg:top-1/2 lg:-translate-x-0 lg:left-0 lg:-translate-y-1/2 lg:py:[0] lg:px-[6vw] z-10`}
+          className={`time-line-con absolute min-h-full lg:min-w-full hidden justify-center py-[6vw] lg:justify-start lg:items-center top-0 left-1/2 -translate-x-1/2 lg:flex lg:min-h-fit lg:top-1/2 lg:-translate-x-0 lg:left-0 lg:-translate-y-1/2 lg:py:[0]  z-10`}
           style={width < 1024 ? heightStyle : widthStyle}
         >
           <div className="time-line min-h-full w-[2px] bg-line lg:w-full lg:h-[2px] "></div>
         </div>
 
-        {procceses.map((pro, index) => (
-          <div
-            key={index}
-            className={`process h-[17.6vh] w-full lg:h-full lg:w-[17.6vw] flex ${
-              pro.flow === "up" ? "justify-start" : "justify-end"
-            } lg:justify-center ${
-              pro.flow === "up" ? "lg:items-start" : "lg:items-end"
-            } relative flex-shrink-0`}
-          >
-            <div className="line-processed absolute w-full h-[2px] hidden lg:h-1/2 lg:w-[2px] bg-line z-[1] lg:block"></div>
+        <div
+          ref={innerRef}
+          className="flex gap-5 lg:gap-0 flex-col lg:flex-row w-full lg:w-fit h-full"
+        >
+          {procceses.map((pro, index) => (
             <div
-              className={`info-con h-full bg-charcoal lg:bg-darkGray w-[80%] ${
-                pro.flow === "up"
-                  ? "rounded-e-full text-left items-start justify-center border-[1.5px] border-gray lg:border-none"
-                  : "rounded-s-full text-right items-end justify-center border-[1.5px] border-gray lg:border-none"
-              } lg:h-fit lg:w-full text-[3vw] p-5 flex flex-col lg:items-center lg:rounded-none relative lg:text-[1.2vw] z-[2] lg:text-center text-white`}
+              key={index}
+              className={`process h-[17.6vh] w-full lg:h-full lg:w-[17.6vw] flex ${
+                pro.flow === "up" ? "justify-start" : "justify-end"
+              } lg:justify-center ${
+                pro.flow === "up" ? "lg:items-start" : "lg:items-end"
+              } relative flex-shrink-0`}
             >
-              <h4>{pro.year}</h4>
-              <h4>{pro.processName}</h4>
-              <h4>{pro.From}</h4>
+              <div className="line-processed absolute w-full h-[2px] hidden lg:h-1/2 lg:w-[2px] bg-line z-[1] lg:block"></div>
+              <div
+                className={`info-con h-full bg-charcoal lg:bg-darkGray w-[80%] ${
+                  pro.flow === "up"
+                    ? "rounded-e-full text-left items-start justify-center border-[1.5px] border-gray lg:border-none"
+                    : "rounded-s-full text-right items-end justify-center border-[1.5px] border-gray lg:border-none"
+                } lg:h-fit lg:w-full text-[3vw] p-5 flex flex-col lg:items-center lg:rounded-none relative lg:text-[1.2vw] z-[2] lg:text-center text-white`}
+              >
+                <h4>{pro.year}</h4>
+                <h4>{pro.processName}</h4>
+                <h4>{pro.From}</h4>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </>
   );
