@@ -35,7 +35,7 @@ function AboutTimeline() {
     },
     {
       year: "2024 - Till now",
-      processName: "Joined Arysoft Services Global Pvt. Ltd.",
+      processName: "Joined Arysoft Global Services Pvt Ltd.",
       From: "Frontend Developer",
       flow: "up",
     },
