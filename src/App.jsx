@@ -21,7 +21,7 @@ import ContactCom from "./Components/ContactCom";
 import LocomotiveScroll from "locomotive-scroll";
 import ContactSec from "./Components/ContactSec";
 import { AnimatePresence } from "framer-motion";
-import projectImage1 from "./images/project-1-hover.webp";
+import projectImage1 from "./images/perfume.png";
 import projectImage2 from "./images/Ary_web.png";
 import ScrollToTop from "./ScrollToTop";
 import HideFooter from "./Components/HideFooter";
