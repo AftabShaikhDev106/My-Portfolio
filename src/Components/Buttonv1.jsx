@@ -5,7 +5,7 @@ function Buttonv1(props) {
     <button className="button-v1 flex items-center h-fit w-fit font-spaceGrotesk py-[1vw] px-[1vw] rounded-full font-semibold bg-white lg:py-[.5vw] lg:px-[.5vw]">
       {props.download ? (
         <a
-          href="/cv.pdf"
+          href="/Aftab_Resume.pdf"
           download="Aftab-CV.pdf"
           className="flex items-center gap-5 h-fit w-fit text-[5vw] text-darkGray md:text-[3.5vw] lg:text-[1vw]"
         >
