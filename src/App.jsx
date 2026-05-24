@@ -435,7 +435,7 @@ function App() {
       gsap.to(".big-nav", {
         right: 0,
         ease: "expo.out",
-        duration: 0.8,
+        duration: 0.4,
         immediateRender: false,
         onComplete: () => {
           mainElement.style.position = "fixed";
@@ -523,7 +523,7 @@ function App() {
       tl.to(".big-nav", {
         right: "-100%",
         ease: "expo.out",
-        duration: 0.8,
+        duration: 0.4,
         immediateRender: false,
         onComplete: () => {
           setClickMenu(true);

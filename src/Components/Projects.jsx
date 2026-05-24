@@ -1,6 +1,37 @@
 import React, { forwardRef } from "react";
 
 const Projects = forwardRef((props, ref) => {
+  const isListView = props.viewMode === "list";
+
+  if (isListView) {
+    return (
+      <a
+        href={props.object.link}
+        target="_blank"
+        className="project-show-link border border-white/60 opacity-0 translate-y-[15px] w-full h-fit cursor-pointer"
+      >
+        <div className="project-showcase flex flex-col md:flex-row">
+          <div className="image-con h-[25vh] md:h-[20vh] w-full md:w-[35%] lg:w-[30%] relative bg-blue-300 flex-shrink-0">
+            <img
+              src={props.object.image}
+              className="h-full w-full object-cover object-[50%,45%]"
+              alt="Poster"
+              loading="lazy"
+            />
+          </div>
+          <div className="text-content flex flex-row md:flex-col justify-between md:justify-center gap-2 md:gap-4 py-4 md:py-0 px-4 md:px-8 w-full">
+            <h4 className="font-spaceGrotesk font-semibold text-white text-[4vw] md:text-[2.5vw] lg:text-[1.5vw]">
+              {props.object.company}
+            </h4>
+            <h4 className="font-spaceGrotesk font-medium text-white/60 text-[3.5vw] md:text-[2vw] lg:text-[1vw]">
+              {props.object.type}
+            </h4>
+          </div>
+        </div>
+      </a>
+    );
+  }
+
   return (
     <>
       <a

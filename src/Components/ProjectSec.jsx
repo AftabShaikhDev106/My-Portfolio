@@ -80,6 +80,19 @@ function ProjectSec(props) {
       overflow: "auto",
     });
 
+    gsap.to(".project-show-link", {
+      scrollTrigger: {
+        scroller: "body",
+        trigger: ".project-container",
+        start: "top 80%",
+      },
+      opacity: 1,
+      y: 0,
+      stagger: 0.1,
+      duration: 0.8,
+      ease: "power2.out",
+    });
+
     return () => {
       if (isLargeScreen) {
         projectShowcase.forEach((show) => {

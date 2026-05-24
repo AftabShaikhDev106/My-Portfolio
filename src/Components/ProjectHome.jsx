@@ -8,10 +8,12 @@ import { AiOutlineFolderOpen } from "react-icons/ai";
 import { FaClone } from "react-icons/fa";
 import { stagger } from "framer-motion";
 import { GiOfficeChair } from "react-icons/gi";
+import { BsGrid3X3GapFill, BsListUl } from "react-icons/bs";
 
 function ProjectHome(props) {
   const hover = useRef(null);
   const [index, setIndex] = useState(0);
+  const [viewMode, setViewMode] = useState("grid");
 
   const isOdd = props.project.length % 2 !== 0;
   const isLargeScreen = DeviceAnimationSetting(1024);
@@ -36,7 +38,7 @@ function ProjectHome(props) {
     let allTypes = document.querySelectorAll(".types");
     allTypes.forEach((type, idx) => {
       type.addEventListener("click", () => {
-        hover.current.style.left = `${idx * 20}%`;
+        hover.current.style.left = `${idx * 33.33}%`;
         setIndex(idx);
       });
     });
@@ -237,6 +239,26 @@ function ProjectHome(props) {
     }
   }, [index]);
 
+  // Re-animate project cards when view mode changes
+  useEffect(() => {
+    if (props.complete) {
+      gsap.fromTo(
+        ".project-show-link",
+        {
+          opacity: 0,
+          y: 15,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          stagger: 0.06,
+          ease: "power2.out",
+        }
+      );
+    }
+  }, [viewMode]);
+
   return (
     <div
       data-scroll
@@ -253,18 +275,18 @@ function ProjectHome(props) {
         </h1>
       </div>
       <div className="project-panel h-fit w-full">
-        <div className="control-panel h-16 w-full relative">
+        <div className="control-panel h-16 w-full relative flex items-center">
           <div className="bottom-line-panel h-[.1vw] w-0 absolute bg-line -bottom-[.1vw]"></div>
           <ul className="h-full w-full lg:w-[70%]  flex relative bottom-0">
             <div
               ref={hover}
-              className="hover-select absolute h-1 w-[20%] left-0 bottom-0 bg-limeGreen rounded-full transition-all duration-300 ease-in-out opacity-0"
+              className="hover-select absolute h-1 w-[33.33%] left-0 bottom-0 bg-limeGreen rounded-full transition-all duration-300 ease-in-out opacity-0"
             ></div>
-            {["All", "Client", "Company's Project", "My Project"].map(
+            {["All", "Client", "Company's Project"].map(
               (type, i) => (
                 <li
                   key={i}
-                  className="types w-[20%] h-full cursor-pointer text-sm text-center flex justify-center items-end lg:items-center font-spaceGrotesk text-white lg:text-xl opacity-0 translate-y-2"
+                  className="types w-[33.33%] h-full cursor-pointer text-sm text-center flex justify-center items-end lg:items-center font-spaceGrotesk text-white lg:text-xl opacity-0 translate-y-2"
                 >
                   <h4 className="flex relative mb-2">
                     {window.innerWidth <= isMobile ? icon[i] : type}
@@ -272,7 +294,6 @@ function ProjectHome(props) {
                       {type === "All" && fullLength}
                       {type === "Client" && client}
                       {type === "Company's Project" && Company}
-                      {type === "My project" && MyProject}
                     </sup>
                   </h4>
                 </li>
@@ -280,9 +301,35 @@ function ProjectHome(props) {
             )}
           </ul>
         </div>
+        <div className="view-toggle flex items-center gap-2 justify-end pt-4">
+            <button
+              onClick={() => setViewMode("grid")}
+              className={`p-2 rounded transition-all duration-300 ${
+                viewMode === "grid"
+                  ? "bg-limeGreen text-black"
+                  : "bg-transparent text-white/50 hover:text-white border border-white/20"
+              }`}
+              title="Grid View"
+            >
+              <BsGrid3X3GapFill size={18} />
+            </button>
+            <button
+              onClick={() => setViewMode("list")}
+              className={`p-2 rounded transition-all duration-300 ${
+                viewMode === "list"
+                  ? "bg-limeGreen text-black"
+                  : "bg-transparent text-white/50 hover:text-white border border-white/20"
+              }`}
+              title="List View"
+            >
+              <BsListUl size={18} />
+            </button>
+          </div>
         <div
-          className={`project-display h-fit min-h-[100svh] lg:min-h-screen grid grid-cols-1 lg:grid-cols-2 py-[6vw] gap-10 ${
-            isOdd ? "place-items-center" : ""
+          className={`project-display h-fit min-h-[100svh] lg:min-h-screen py-[6vw] gap-10 ${
+            viewMode === "grid"
+              ? `grid grid-cols-1 lg:grid-cols-2 ${isOdd ? "place-items-center" : ""}`
+              : "flex flex-col"
           }`}
         >
           {index === 0 && props.project.length > 0 ? (
@@ -293,6 +340,7 @@ function ProjectHome(props) {
                 index={i}
                 fullObj={props.project}
                 isOdd={isOdd}
+                viewMode={viewMode}
               />
             ))
           ) : index === 1 && client > 0 ? (
@@ -305,6 +353,7 @@ function ProjectHome(props) {
                   index={i}
                   fullObj={props.project}
                   isOdd={isOdd}
+                  viewMode={viewMode}
                 />
               ))
           ) : index === 2 && Company > 0 ? (
@@ -317,6 +366,7 @@ function ProjectHome(props) {
                   index={i}
                   fullObj={props.project}
                   isOdd={isOdd}
+                  viewMode={viewMode}
                 />
               ))
           ) : index === 3 && MyProject > 0 ? (
@@ -329,6 +379,7 @@ function ProjectHome(props) {
                   index={i}
                   fullObj={props.project}
                   isOdd={isOdd}
+                  viewMode={viewMode}
                 />
               ))
           ) : index === 4 && Clone > 0 ? (
@@ -341,6 +392,7 @@ function ProjectHome(props) {
                   index={i}
                   fullObj={props.project}
                   isOdd={isOdd}
+                  viewMode={viewMode}
                 />
               ))
           ) : (

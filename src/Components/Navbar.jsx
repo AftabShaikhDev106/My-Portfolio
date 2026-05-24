@@ -1,11 +1,12 @@
 import gsap from "gsap";
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Navbar(props) {
   const [click, setClick] = useState(true);
   const [clickable, setClickable] = useState(true);
   const tl = gsap.timeline({ paused: true });
+  const location = useLocation();
 
   const links = [
     { name: "Home", path: "/" },
@@ -275,7 +276,7 @@ function Navbar(props) {
             {links.map((link, index) => (
               <Link key={index} to={link.path} className=" w-full ">
                 <div className="link py-3 h-fit w-full flex items-center gap-3">
-                  <h4 className="text-white font-spaceGrotesk text-[15vw] pl-8 w-full flex items-center leading-none tracking-tight overflow-hidden md:text-[13vw]">
+                  <h4 className={`font-spaceGrotesk text-[15vw] pl-8 w-full flex items-center leading-none tracking-tight overflow-hidden md:text-[13vw] ${location.pathname === link.path ? 'text-limeGreen' : 'text-white'}`}>
                     {link.name.split("").map((li, index) => (
                       <span
                         key={index}
@@ -336,8 +337,27 @@ function Navbar(props) {
                 <Link
                   to={li.path}
                   className="h-full flex items-center justify-center"
+                  onMouseEnter={() => {
+                    const isActive = location.pathname === li.path;
+                    gsap.to(".mouse", {
+                      scale: 4,
+                      backgroundColor: isActive ? "#A3E635" : "white",
+                      mixBlendMode: "normal",
+                      duration: 0.3,
+                      immediateRender: false,
+                    });
+                  }}
+                  onMouseLeave={() => {
+                    gsap.to(".mouse", {
+                      scale: 1,
+                      backgroundColor: "white",
+                      mixBlendMode: "difference",
+                      duration: 0.3,
+                      immediateRender: false,
+                    });
+                  }}
                 >
-                  <span className="link-item bright-sm font-spaceGrotesk uppercase text-white font-bold text-[1.1vw] py-1 relative cursor-pointer hover:text-limeGreen transition-all ease-linear duration-[.3] flex justify-center align-center translate-y-full opacity-0">
+                  <span className={`link-item bright-sm font-spaceGrotesk uppercase font-bold text-[1.1vw] py-1 relative cursor-pointer transition-colors ease-linear duration-300 flex justify-center align-center translate-y-full opacity-0 ${location.pathname === li.path ? 'text-limeGreen hover:text-white' : 'text-white hover:text-limeGreen'}`}>
                     {li.name}
                   </span>
                 </Link>

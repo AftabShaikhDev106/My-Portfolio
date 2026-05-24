@@ -34,12 +34,12 @@ function AboutSkill() {
       scrollTrigger: {
         trigger: ".about-skill-page",
         start: "top 60%",
-        end: "50% 55%",
-        scrub: 2,
       },
       scale: 0,
       opacity: 0,
-      stagger: 0.3,
+      stagger: 0.15,
+      duration: 0.6,
+      ease: "back.out(1.7)",
     });
     return () => {};
   }, []);
