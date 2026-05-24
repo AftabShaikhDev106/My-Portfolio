@@ -6,7 +6,7 @@ const Projects = forwardRef((props, ref) => {
       <a
         href={props.object.link}
         target="_blank"
-        className={`project-show-link ${
+        className={`project-show-link border border-white/60 opacity-0 translate-y-[15px] ${
           props.index === props.fullObj.length - 1 && props.isOdd
             ? "w-full lg:w-1/2 "
             : "w-full lg:full "

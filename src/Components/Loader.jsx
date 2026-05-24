@@ -21,7 +21,7 @@ function Loader(props) {
         counterRef.current.textContent = counterVal;
       }
 
-      setTimeout(updateCounter, 200); // Update counter every 200ms
+      setTimeout(updateCounter, 100); // Update counter every 200ms
     }
     updateCounter();
   }

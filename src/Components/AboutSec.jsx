@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import AboutImg from "../images/about-page.jpeg";
+import AboutImg from "../images/about-img.png";
 import gsap from "gsap";
 import { Link } from "react-router-dom";
 // import loca

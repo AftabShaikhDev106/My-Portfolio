@@ -19,9 +19,8 @@ function ProjectHome(props) {
   const client = props.project.filter((item) => item.type === "Client").length;
   const MyProject = props.project.filter((item) => item.type === "My").length;
   const Clone = props.project.filter((item) => item.type === "Clone").length;
-  const Company = props.project.filter(
-    (item) => item.type === "Company"
-  ).length;
+  const Company = props.project.filter((item) => item.type === "Company")
+    .length;
 
   const icon = [
     <AiOutlineAppstore />,
@@ -124,6 +123,14 @@ function ProjectHome(props) {
   }, [index, isLargeScreen]);
 
   useEffect(() => {
+    // Initialize styles immediately on mount to prevent element flash/flicker
+    gsap.set(".top-title h1", { width: 0, opacity: 0 });
+    gsap.set(".project-line", { width: 0 });
+    gsap.set(".bottom-line-panel", { width: 0 });
+    gsap.set(".types", { opacity: 0, y: 10 });
+    gsap.set(".hover-select", { opacity: 0 });
+    gsap.set(".project-show-link", { opacity: 0, y: 15 });
+
     const tl = gsap.timeline();
     if (props.complete) {
       tl.fromTo(
@@ -134,9 +141,10 @@ function ProjectHome(props) {
         },
         {
           width: "100%",
-          duration: 1,
+          duration: 0.6,
           opacity: 1,
-          delay: 0.5,
+          delay: 0.1,
+          ease: "power2.out",
         }
       )
         .fromTo(
@@ -146,8 +154,10 @@ function ProjectHome(props) {
           },
           {
             width: "160px",
-            duration: 1,
-          }
+            duration: 0.4,
+            ease: "power2.out",
+          },
+          "-=0.4"
         )
         .fromTo(
           ".bottom-line-panel",
@@ -156,17 +166,25 @@ function ProjectHome(props) {
           },
           {
             width: "100%",
-          }
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          "-=0.3"
         )
         .fromTo(
           ".types",
           {
             opacity: 0,
+            y: 10,
           },
           {
             opacity: 1,
-            stagger: 0.3,
-          }
+            y: 0,
+            duration: 0.3,
+            stagger: 0.05,
+            ease: "power2.out",
+          },
+          "-=0.3"
         )
         .fromTo(
           ".hover-select",
@@ -175,22 +193,49 @@ function ProjectHome(props) {
           },
           {
             opacity: 1,
-          }
+            duration: 0.2,
+          },
+          "<"
         )
         .fromTo(
           ".project-show-link",
           {
             opacity: 0,
+            y: 15,
           },
           {
             opacity: 1,
-            stagger: 0.3,
-          }
+            y: 0,
+            duration: 0.4,
+            stagger: 0.06,
+            ease: "power2.out",
+          },
+          "-=0.2"
         );
     }
 
     return () => {};
   }, [props.complete]);
+
+  // Animate project cards whenever the selected tab changes
+  useEffect(() => {
+    if (props.complete) {
+      gsap.fromTo(
+        ".project-show-link",
+        {
+          opacity: 0,
+          y: 15,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          stagger: 0.06,
+          ease: "power2.out",
+        }
+      );
+    }
+  }, [index]);
 
   return (
     <div
@@ -199,27 +244,27 @@ function ProjectHome(props) {
       className="section project-page-1 h-fit w-full bg-darkGray px-[6vw] relative z-[2] border-b-2 border-line"
     >
       <div className="top-title text-white font-spaceGrotesk font-medium text-[6vw] p-[6vw] pb-[4vw] leading-none w-full flex flex-col text-start">
-        <h1 className="overflow-hidden whitespace-nowrap">
+        <h1 className="overflow-hidden whitespace-nowrap opacity-0 w-0">
           Innovative Solutions<span className="text-limeGreen">,</span>
         </h1>
-        <h1 className="flex items-center gap-2 lg:gap-5 overflow-hidden whitespace-nowrap">
-          <span className="project-line inline-block w-16 lg:w-40 h-1 rounded-full bg-white"></span>
+        <h1 className="flex items-center gap-2 lg:gap-5 overflow-hidden whitespace-nowrap opacity-0 w-0">
+          <span className="project-line inline-block w-0 lg:w-0 h-1 rounded-full bg-white"></span>
           Dynamic Creations
         </h1>
       </div>
       <div className="project-panel h-fit w-full">
         <div className="control-panel h-16 w-full relative">
-          <div className="bottom-line-panel h-[.1vw] w-full absolute bg-line -bottom-[.1vw]"></div>
+          <div className="bottom-line-panel h-[.1vw] w-0 absolute bg-line -bottom-[.1vw]"></div>
           <ul className="h-full w-full lg:w-[70%]  flex relative bottom-0">
             <div
               ref={hover}
-              className="hover-select absolute h-1 w-[20%] left-0 bottom-0 bg-limeGreen rounded-full transition-all duration-300 ease-in-out"
+              className="hover-select absolute h-1 w-[20%] left-0 bottom-0 bg-limeGreen rounded-full transition-all duration-300 ease-in-out opacity-0"
             ></div>
-            {["All", "Client", "Company's Project", "My Project", "Clones"].map(
+            {["All", "Client", "Company's Project", "My Project"].map(
               (type, i) => (
                 <li
                   key={i}
-                  className="types w-[25%] h-full cursor-pointer text-sm text-center flex justify-center items-end lg:items-center font-spaceGrotesk text-white lg:text-xl"
+                  className="types w-[20%] h-full cursor-pointer text-sm text-center flex justify-center items-end lg:items-center font-spaceGrotesk text-white lg:text-xl opacity-0 translate-y-2"
                 >
                   <h4 className="flex relative mb-2">
                     {window.innerWidth <= isMobile ? icon[i] : type}
@@ -228,7 +273,6 @@ function ProjectHome(props) {
                       {type === "Client" && client}
                       {type === "Company's Project" && Company}
                       {type === "My project" && MyProject}
-                      {type === "Clones" && Clone}
                     </sup>
                   </h4>
                 </li>

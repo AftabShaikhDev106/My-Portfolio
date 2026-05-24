@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Buttonv1 from "./Buttonv1";
 import { MdDownload } from "react-icons/md";
 import gsap from "gsap";
-import heroImage from "../images/front-image-bgr.png";
+import heroImage from "../images/hero-suit.png";
 
 function HeroPage({ complete }) {
   const [random, setRandom] = useState(0);
@@ -33,8 +33,12 @@ function HeroPage({ complete }) {
       .set(".hero-image", { height: "0%" });
 
     if (complete) {
-      tl.to(".hero-image", { height: "100%", duration: 1 }, "a")
-        .to(".oneliner", { y: 0, opacity: 1, stagger: 0.03, duration: 1 }, "a")
+      tl.to(".oneliner", { y: 0, opacity: 1, stagger: 0.03, duration: 1 }, "a")
+        .to(
+          ".hero-image",
+          { height: "100%", duration: 1, ease: "power2.out" },
+          "a"
+        )
         .to(".cv-btn button", {
           scale: 1,
           opacity: 1,
@@ -74,9 +78,9 @@ function HeroPage({ complete }) {
         </div>
       </div>
       <div className="bottom-content h-[65svh] w-full relative flex items-end lg:absolute lg:top-0 lg:h-full lg:left-0 lg:z-[1]">
-        <div className="image hero-image relative w-full bottom-0 z-[2] flex justify-center items-end">
+        <div className="image hero-image relative w-full  bottom-0 z-[2] flex justify-center items-end overflow-hidden">
           <img
-            className="w-full lg:h-full object-cover object-top lg:w-[50%]"
+            className="w-full md:w-auto md:h-full object-cover object-top "
             src={heroImage}
             alt="Hero"
           />

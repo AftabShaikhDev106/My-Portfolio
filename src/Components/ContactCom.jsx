@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import BottomFooter from "./BottomFooter";
-import contactImage from "../images/contact-page.jpeg";
+import contactImage from "../images/contact-img.png";
 import Transition from "../Transition.jsx";
 import gsap from "gsap";
 
@@ -59,10 +59,10 @@ function ContactCom(props) {
 
   return (
     <>
-      <div className="section contact-page h-[100svh] lg:h-screen w-full relative  z-[3]">
-        <div className="main-contact-con h-[80%] lg:h-[90%] gap-5 lg:gap-0 flex flex-col lg:flex-row p-[6vw] ">
-          <div className="left-contact-content h-[45%] lg:h-full lg:w-1/2 relative flex justify-end lg:justify-start items-end ">
-            <div className="image-padding-container pr-[6vw] h-[88%] w-[100%] absolute top-0 left-0 z-[3]">
+      <div className="section contact-page h-fit w-full relative  z-[3]">
+        <div className="main-contact-con h-[100svh] lg:h-screen gap-5 lg:gap-0 flex flex-col lg:flex-row p-[6vw] ">
+          <div className="left-contact-content h-auto w-full aspect-square md:h-auto md:w-full md:aspect-video lg:h-full lg:w-1/2 relative flex justify-end lg:justify-start items-end ">
+            <div className="image-padding-container  md:pr-0 lg:pr-[6vw] h-full md:h-full lg:h-[88%] w-[100%] absolute top-0 left-0 z-[3]">
               <div className="image-top contact-image-anim h-full w-full relative">
                 <img
                   src={contactImage}
@@ -99,9 +99,9 @@ function ContactCom(props) {
                 </h4>
                 <h4 className="contact-detail-text text-white font-spaceGrotesk font-semibold lg:text-lg flex flex-row leading-none gap-2 lg:gap-3">
                   Phone:{" "}
-                  <a href="tel:+917021108472" className="flex gap-2">
-                    <span>+91-70211</span>
-                    <span>08472</span>
+                  <a href="tel:+917208239032" className="flex gap-2">
+                    <span>+91-72082</span>
+                    <span>39032</span>
                   </a>
                 </h4>
               </div>

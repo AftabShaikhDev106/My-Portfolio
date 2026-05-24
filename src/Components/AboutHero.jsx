@@ -2,7 +2,7 @@ import gsap from "gsap";
 import React from "react";
 import { useEffect } from "react";
 
-import aboutImage from "../images/about-page.jpeg";
+import aboutImage from "../images/about-img.png";
 
 function AboutHero(props) {
   useEffect(() => {

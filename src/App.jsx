@@ -23,6 +23,10 @@ import ContactSec from "./Components/ContactSec";
 import { AnimatePresence } from "framer-motion";
 import projectImage1 from "./images/perfume.png";
 import projectImage2 from "./images/Ary_web.png";
+import projectImage3 from "./images/goschoolify.png";
+import projectImage4 from "./images/arysoft_site.png";
+import projectImage5 from "./images/xjoins.png";
+
 import ScrollToTop from "./ScrollToTop";
 import HideFooter from "./Components/HideFooter";
 import Buttonv1 from "./Components/Buttonv1";
@@ -50,16 +54,37 @@ function App() {
 
   const projects = [
     {
+      company: "Arysoft Website",
+      type: "Company",
+      image: projectImage4,
+      link: "https://www.ary-soft.com/",
+    },
+
+    {
+      company: "Xjoins Website (Arysoft)",
+      type: "Company",
+      image: projectImage5,
+      link: "https://xjoins.com/",
+    },
+
+    {
+      company: "Aryventory Website & App (Arysoft)",
+      type: "Company",
+      image: projectImage2,
+      link: "https://aryventory.com/",
+    },
+    {
+      company: "Goschoolify Website & App (Arysoft)",
+      type: "Company",
+      image: projectImage3,
+      link: "https://goschoolify.com/",
+    },
+
+    {
       company: "Yousco Trading LLC",
       type: "Client",
       image: projectImage1,
       link: "https://www.youscotrading.com/",
-    },
-    {
-      company: "Aryventory Website (Arysoft)",
-      type: "Company",
-      image: projectImage2,
-      link: "https://aryventory.com/",
     },
   ];
 

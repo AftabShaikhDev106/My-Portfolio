@@ -9,7 +9,8 @@ import { Link } from "react-router-dom";
 function ProjectSec(props) {
   const isLargeScreen = DeviceAnimationSetting(1024);
 
-  const isOdd = props.project.length % 2 !== 0;
+  const displayedProjects = props.project.slice(0, 4);
+  const isOdd = displayedProjects.length % 2 !== 0;
 
   useEffect(() => {
     const projectShowcase = document.querySelectorAll(".project-showcase");
@@ -109,12 +110,12 @@ function ProjectSec(props) {
             isOdd ? "place-items-center" : ""
           } gap-10 lg:grid-cols-2`}
         >
-          {props.project.map((pro, index) => (
+          {displayedProjects.map((pro, index) => (
             <Projects
               key={index}
               object={pro}
               index={index}
-              fullObj={props.project}
+              fullObj={displayedProjects}
               isOdd={isOdd}
             />
           ))}
